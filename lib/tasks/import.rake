@@ -29,6 +29,7 @@ namespace :import do
 
     CSV.foreach('./db/csv/invoices.csv', headers: true, header_converters: :symbol) do |row|
       Invoice.create!(id:          row[:id],
+                      customer_id: row[:customer_id],
                       merchant_id: row[:merchant_id],
                       status:      row[:status],
                       created_at:  row[:created_at],
