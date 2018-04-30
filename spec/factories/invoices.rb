@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :invoice, class: User do
+  factory :invoice do
     customer
     merchant
     status ["Failed", "Success"].sample

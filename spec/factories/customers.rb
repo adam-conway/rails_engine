@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :customer, class: User do
+  factory :customer do
     first_name { Faker::StarWars.character }
     last_name { Faker::StarWars.character }
   end

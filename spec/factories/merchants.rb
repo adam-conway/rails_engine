@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :merchant, class: User do
+  factory :merchant do
     name { Faker::StarWars.character }
   end
 end
