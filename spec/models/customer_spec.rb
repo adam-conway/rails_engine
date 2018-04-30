@@ -25,10 +25,7 @@ RSpec.describe Customer, type: :model do
     end
     context 'valid attributes' do
       it 'is valid with all attributesß' do
-        customer = Customer.create(
-          first_name: "Adam",
-          last_name: "Conway"
-        )
+        customer = create(:customer)
 
         expect(customer).to be_valid
       end
