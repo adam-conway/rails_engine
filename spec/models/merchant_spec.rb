@@ -15,9 +15,7 @@ RSpec.describe Merchant, type: :model do
     end
     context 'valid attributes' do
       it 'is valid with all attributesß' do
-        merchant = Merchant.create(
-          name: "Adam"
-        )
+        merchant = create(:merchant)
 
         expect(merchant).to be_valid
       end
