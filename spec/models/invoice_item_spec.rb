@@ -4,6 +4,8 @@ RSpec.describe InvoiceItem, type: :model do
   describe 'validations' do
     it{should validate_presence_of(:quantity)}
     it{should validate_presence_of(:price)}
+    it{should belong_to(:item)}
+    it{should belong_to(:invoice)}
   end
 
   describe 'field validations' do
