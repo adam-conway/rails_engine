@@ -27,5 +27,11 @@ RSpec.describe Item, type: :model do
 
       expect(item).to_not be_valid
     end
+
+    it 'should be valid with all attributes' do
+      item = create(:item)
+
+      expect(item).to be_valid
+    end
   end
 end
