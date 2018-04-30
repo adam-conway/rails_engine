@@ -14,5 +14,11 @@ RSpec.describe Invoice, type: :model do
 
       expect(invoice).to_not be_valid
     end
+
+    it 'should be valid with all attributes' do
+      invoice = create(:invoice)
+
+      expect(invoice).to be_valid
+    end
   end
 end
