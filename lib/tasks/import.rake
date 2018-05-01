@@ -1,12 +1,14 @@
-# require 'csv'
-# require './app/models/merchant'
-# require './app/models/item'
-# require './app/models/invoice'
-# require './app/models/invoice_item'
+require 'csv'
 
 namespace :import do
   desc "Import all sales engine data"
   task all: :environment do
+    InvoiceItem.destroy_all
+    Item.destroy_all
+    Invoice.destroy_all
+    Merchant.destroy_all
+    Customer.destroy_all
+    Transaction.destroy_all
 
     ActiveRecord::Base.connection.reset_pk_sequence!(:table_name)
 
@@ -27,6 +29,14 @@ namespace :import do
                   updated_at:  row[:updated_at])
     end
 
+    CSV.foreach('./db/csv/customers.csv', headers: true, header_converters: :symbol) do |row|
+      Customer.create!(id:         row[:id],
+        first_name: row[:first_name],
+        last_name:  row[:last_name],
+        created_at: row[:created_at],
+        updated_at: row[:updated_at])
+    end
+
     CSV.foreach('./db/csv/invoices.csv', headers: true, header_converters: :symbol) do |row|
       Invoice.create!(id:          row[:id],
                       customer_id: row[:customer_id],
@@ -41,27 +51,19 @@ namespace :import do
                          item_id:    row[:item_id],
                          invoice_id: row[:invoice_id],
                          quantity:   row[:quantity],
-                         unit_price: row[:unit_price],
+                         price:      row[:unit_price],
                          created_at: row[:created_at],
                          updated_at: row[:updated_at])
     end
 
-    CSV.foreach('./db/csv/customers.csv', headers: true, header_converters: :symbol) do |row|
-      Customer.create!(id:         row[:id],
-                       first_name: row[:first_name],
-                       last_name:  row[:last_name],
-                       created_at: row[:created_at],
-                       updated_at: row[:updated_at])
-    end
-
     CSV.foreach('./db/csv/transactions.csv', headers: true, header_converters: :symbol) do |row|
-      Customer.create!(id:                          row[:id],
-                       invoice_id:                  row[:invoice_id],
-                       credit_card_number:          row[:credit_card_number],
-                       credit_card_expiration_date: row[:credit_card_expiration_date],
-                       result:                      row[:result],
-                       created_at:                  row[:created_at],
-                       updated_at:                  row[:updated_at])
+      Transaction.create!(id:                          row[:id],
+                          invoice_id:                  row[:invoice_id],
+                          credit_card_number:          row[:credit_card_number],
+                          credit_card_expiration_date: row[:credit_card_expiration_date],
+                          result:                      row[:result],
+                          created_at:                  row[:created_at],
+                          updated_at:                  row[:updated_at])
     end
   end
 end
