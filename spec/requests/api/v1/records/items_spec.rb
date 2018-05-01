@@ -48,6 +48,18 @@ describe 'Invoices API' do
     expect(item["description"]).to eq(description)
   end
 
+  it 'can return single item by passing description param; case-insensitive' do
+    create(:item)
+    description = Item.last.description
+
+    get "/api/v1/items/find?description=#{description.upcase}"
+
+    item = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(item["description"]).to eq(description)
+  end
+
   skip 'can return single item by passing price param' do
     create(:item)
     price = Item.last.price
