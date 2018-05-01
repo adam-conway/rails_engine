@@ -48,7 +48,7 @@ describe 'Invoices API' do
     expect(invoice["status"]).to eq(status)
   end
 
-  skip 'can return single invoice by passing status param; case-insensitive' do
+  it 'can return single invoice by passing status param; case-insensitive' do
     create(:invoice)
     status = Invoice.last.status
 
@@ -126,7 +126,7 @@ describe 'Invoices API' do
     expect(invoice.count).to eq(3)
   end
 
-  skip 'can return all invoices matching a status param; case-insensitive' do
+  it 'can return all invoices matching a status param; case-insensitive' do
     create(:invoice, status: "shipped")
     create_list(:invoice, 3, status: "pending")
 
