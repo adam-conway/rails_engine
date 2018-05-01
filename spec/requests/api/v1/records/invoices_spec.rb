@@ -4,7 +4,7 @@ describe 'Invoices API' do
   it 'returns index of invoices' do
     create_list(:invoice, 2)
 
-    get '/api/v1/invoices.json'
+    get '/api/v1/invoices'
 
     invoices = JSON.parse(response.body)
 
