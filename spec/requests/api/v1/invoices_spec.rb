@@ -48,6 +48,18 @@ describe 'Invoices API' do
     expect(invoice["status"]).to eq(status)
   end
 
+  skip 'can return single invoice by passing status param; case-insensitive' do
+    create(:invoice)
+    status = Invoice.last.status
+
+    get "/api/v1/invoices/find?status=#{status.upcase}"
+
+    invoice = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(invoice["status"]).to eq(status)
+  end
+
   it 'can return single invoice by passing merchant_id param' do
     create(:invoice)
     merchant_id = Invoice.last.merchant_id
@@ -103,6 +115,20 @@ describe 'Invoices API' do
     status = Invoice.last.status
 
     get "/api/v1/invoices/find_all?status=#{status}"
+
+    invoice = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(invoice.count).to eq(3)
+  end
+
+  skip 'can return all invoices matching a status param; case-insensitive' do
+    create(:invoice, status: "shipped")
+    create_list(:invoice, 3, status: "pending")
+
+    status = Invoice.last.status
+
+    get "/api/v1/invoices/find_all?status=#{status.upcase}"
 
     invoice = JSON.parse(response.body)
 
