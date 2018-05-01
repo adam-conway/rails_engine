@@ -196,12 +196,14 @@ describe 'Invoices API' do
     expect(invoice.count).to eq(3)
   end
 
-  # it 'can return a random invoice' do
-  #   invoice_1 = create(:invoice)
-  #   invoice_2 = create(:invoice)
-  #
-  #   get "api/v1/merchants/random"
-  #
-  #   expect(response).to be_success
-  # end
+  it 'can return a random invoice' do
+    invoices = create_list(:invoice, 5)
+
+    get '/api/v1/invoices/random'
+
+    invoice = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(invoices.map(&:id).include?(invoice["id"]))
+  end
 end
