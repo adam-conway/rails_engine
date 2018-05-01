@@ -85,7 +85,7 @@ describe 'Invoices API' do
   end
 
   it 'can return single invoice by passing created_at param' do
-    create(:invoice, created_at: "2018-04-30 10:45:00 UTC")
+    create(:invoice)
     id = Invoice.last.id
     created_at = Invoice.last.created_at
 
@@ -99,7 +99,7 @@ describe 'Invoices API' do
   end
 
   it 'can return single invoice by passing updated_at param' do
-    create(:invoice, updated_at: "2018-04-30 10:45:00 UTC")
+    create(:invoice)
     id = Invoice.last.id
     updated_at = Invoice.last.updated_at
 
@@ -174,7 +174,7 @@ describe 'Invoices API' do
 
   it 'can return all invoices matching a created_at param' do
     create(:invoice, created_at: Date.yesterday)
-    create_list(:invoice, 3, created_at: "2018-04-30 10:45:00 UTC")
+    create_list(:invoice, 3)
     created_at = Invoice.last.created_at
 
     get "/api/v1/invoices/find_all?created_at=#{created_at}"
@@ -186,8 +186,8 @@ describe 'Invoices API' do
   end
 
   it 'can return all invoices matching a updated_at param' do
-    create(:invoice, created_at: Date.yesterday)
-    create_list(:invoice, 3, updated_at: "2018-04-30 10:45:00 UTC")
+    create(:invoice, updated_at: Date.yesterday)
+    create_list(:invoice, 3)
     updated_at = Invoice.last.updated_at
 
     get "/api/v1/invoices/find_all?updated_at=#{updated_at}"
