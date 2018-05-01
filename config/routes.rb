@@ -20,6 +20,12 @@ Rails.application.routes.draw do
         get '/random', to: 'random#show'
       end
 
+      namespace :items do
+        get '/find/', to: 'search#show'
+        get '/find_all/', to: 'search#index'
+        get '/random', to: 'random#show'
+      end
+
       namespace :transactions do
         get '/find', to: 'search#show'
         get '/find_all', to: 'search#index'

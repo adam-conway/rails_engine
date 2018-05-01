@@ -23,19 +23,19 @@ describe 'Invoices API' do
     expect(response).to be_success
     expect(item["id"]).to eq(item_id)
   end
-  #
-  # it 'can return single invoice by passing id param' do
-  #   create(:invoice)
-  #   id = Invoice.last.id
-  #
-  #   get "/api/v1/invoices/find?id=#{id}"
-  #
-  #   invoice = JSON.parse(response.body)
-  #
-  #   expect(response).to be_success
-  #   expect(invoice["id"]).to eq(id)
-  # end
-  #
+
+  it 'can return single item by passing id param' do
+    create(:item)
+    id = Item.last.id
+
+    get "/api/v1/items/find?id=#{id}"
+
+    item = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(item["id"]).to eq(id)
+  end
+
   # it 'can return single invoice by passing status param' do
   #   create(:invoice)
   #   status = Invoice.last.status
