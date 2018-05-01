@@ -84,8 +84,9 @@ describe 'Invoices API' do
     expect(invoice["customer_id"]).to eq(customer_id)
   end
 
-  skip 'can return single invoice by passing created_at param' do
-    create(:invoice)
+  it 'can return single invoice by passing created_at param' do
+    create(:invoice, created_at: "2018-04-30 10:45:00 UTC")
+    id = Invoice.last.id
     created_at = Invoice.last.created_at
 
     get "/api/v1/invoices/find?created_at=#{created_at}"
@@ -93,11 +94,13 @@ describe 'Invoices API' do
     invoice = JSON.parse(response.body)
 
     expect(response).to be_success
-    expect(invoice["created_at"]).to eq(created_at)
+    expect(invoice["id"]).to eq(id)
+    expect(invoice["created_at"].to_date).to eq(created_at.to_date)
   end
 
-  skip 'can return single invoice by passing updated_at param' do
-    create(:invoice)
+  it 'can return single invoice by passing updated_at param' do
+    create(:invoice, updated_at: "2018-04-30 10:45:00 UTC")
+    id = Invoice.last.id
     updated_at = Invoice.last.updated_at
 
     get "/api/v1/invoices/find?updated_at=#{updated_at}"
@@ -105,7 +108,8 @@ describe 'Invoices API' do
     invoice = JSON.parse(response.body)
 
     expect(response).to be_success
-    expect(invoice["updated_at"]).to eq(updated_at)
+    expect(invoice["id"]).to eq(id)
+    expect(invoice["updated_at"].to_date).to eq(updated_at.to_date)
   end
 
   it 'can return all invoices matching a status param' do
@@ -168,9 +172,9 @@ describe 'Invoices API' do
     expect(invoice.count).to eq(8)
   end
 
-  skip 'can return all invoices matching a created_at param' do
+  it 'can return all invoices matching a created_at param' do
     create(:invoice, created_at: Date.yesterday)
-    create_list(:invoice, 3, created_at: Date.today)
+    create_list(:invoice, 3, created_at: "2018-04-30 10:45:00 UTC")
     created_at = Invoice.last.created_at
 
     get "/api/v1/invoices/find_all?created_at=#{created_at}"
@@ -181,9 +185,9 @@ describe 'Invoices API' do
     expect(invoice.count).to eq(3)
   end
 
-  skip 'can return all invoices matching a updated_at param' do
+  it 'can return all invoices matching a updated_at param' do
     create(:invoice, created_at: Date.yesterday)
-    create_list(:invoice, 3, created_at: Date.today)
+    create_list(:invoice, 3, updated_at: "2018-04-30 10:45:00 UTC")
     updated_at = Invoice.last.updated_at
 
     get "/api/v1/invoices/find_all?updated_at=#{updated_at}"
