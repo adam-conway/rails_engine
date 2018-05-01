@@ -60,15 +60,17 @@ describe "Merchants API" do
   end
 
   it "can get one merchant based on created_at" do
-    skip
-    merchant_list = create_list(:merchant, 10)
+    date = "2018-04-30 10:45:00 UTC"
+    merchant1 = create(:merchant, created_at: "2018-04-30 10:45:00 UTC")
+    merchant2 = create(:merchant)
+    merchant3 = create(:merchant)
 
-    get "/api/v1/merchants/find?created_at=#{merchant_list[5].created_at}"
+    get "/api/v1/merchants/find?created_at=#{merchant1.created_at}"
 
     merchant = JSON.parse(response.body)
 
     expect(response).to be_success
-    expect(merchant["id"]).to eq(merchant_list[5].id)
+    expect(merchant["id"]).to eq(merchant1.id)
   end
 
   it "can get one merchant based on updated_at" do

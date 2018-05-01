@@ -6,4 +6,9 @@ class Merchant < ApplicationRecord
   def single_merchant_revenue
     invoices.where(status: "Success").joins(:invoice_items).sum(:price)
   end
+
+  def single_merchant_revenue_date(date)
+    # binding.pry
+    # invoices.where(status: "Success").joins(:invoice_items).sum(:price)
+  end
 end
