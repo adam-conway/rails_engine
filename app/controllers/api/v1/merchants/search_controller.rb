@@ -5,7 +5,6 @@ class Api::V1::Merchants::SearchController < ApplicationController
   end
 
   def index
-    binding.pry
     render json: Merchant.where(search_params)
   end
 

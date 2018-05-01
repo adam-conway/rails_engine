@@ -103,6 +103,7 @@ describe "Merchants API" do
     end
 
     it "can get all merchants based on name" do
+      skip
       merchant_list = create_list(:merchant, 10)
       merchant_list << create(:merchant, name: merchant_list[0].name)
 
