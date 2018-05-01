@@ -10,7 +10,6 @@ class Api::V1::Merchants::SearchController < ApplicationController
 
   private
     def search_params
-      params.each {|k,v| v.downcase!}
       params.permit(:id, :name, :created_at, :updated_at)
     end
 end
