@@ -50,7 +50,7 @@ describe "Merchants API" do
   it "can get one merchant based on name (case-insensitive)" do
     merchant_list = create_list(:merchant, 10)
 
-    get "/api/v1/merchants/find?name=#{merchant_list[3].name}"
+    get "/api/v1/merchants/find?name=#{merchant_list[3].name.upcase}"
 
     merchant = JSON.parse(response.body)
 
