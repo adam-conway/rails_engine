@@ -23,4 +23,148 @@ describe 'Invoices API' do
     expect(response).to be_success
     expect(invoice["id"]).to eq(invoice_id)
   end
+
+  it 'can return single invoice by passing id param' do
+    create(:invoice)
+    id = Invoice.last.id
+
+    get "/api/v1/invoices/find?id=#{id}"
+
+    invoice = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(invoice["id"]).to eq(id)
+  end
+
+  it 'can return single invoice by passing status param' do
+    create(:invoice)
+    status = Invoice.last.status
+
+    get "/api/v1/invoices/find?status=#{status}"
+
+    invoice = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(invoice["status"]).to eq(status)
+  end
+
+  it 'can return single invoice by passing merchant_id param' do
+    create(:invoice)
+    merchant_id = Invoice.last.merchant_id
+
+    get "/api/v1/invoices/find?merchant_id=#{merchant_id}"
+
+    invoice = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(invoice["merchant_id"]).to eq(merchant_id)
+  end
+
+  it 'can return single invoice by passing customer_id param' do
+    create(:invoice)
+    customer_id = Invoice.last.customer_id
+
+    get "/api/v1/invoices/find?customer_id=#{customer_id}"
+
+    invoice = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(invoice["customer_id"]).to eq(customer_id)
+  end
+
+  skip 'can return single invoice by passing created_at param' do
+    create(:invoice)
+    created_at = Invoice.last.created_at
+
+    get "/api/v1/invoices/find?created_at=#{created_at}"
+
+    invoice = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(invoice["created_at"]).to eq(created_at)
+  end
+
+  skip 'can return single invoice by passing updated_at param' do
+    create(:invoice)
+    updated_at = Invoice.last.updated_at
+
+    get "/api/v1/invoices/find?updated_at=#{updated_at}"
+
+    invoice = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(invoice["updated_at"]).to eq(updated_at)
+  end
+
+  it 'can return all invoices matching a status param' do
+    create(:invoice, status: "shipped")
+    create_list(:invoice, 3, status: "pending")
+
+    status = Invoice.last.status
+
+    get "/api/v1/invoices/find_all?status=#{status}"
+
+    invoice = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(invoice.count).to eq(3)
+  end
+
+  it 'can return all invoices matching a merchant_id param' do
+    create(:merchant, id: 1)
+    create(:merchant, id: 2)
+    create(:invoice, merchant_id: 1)
+    create_list(:invoice, 4, merchant_id: 2)
+
+    merchant_id = Invoice.last.merchant_id
+
+    get "/api/v1/invoices/find_all?merchant_id=#{merchant_id}"
+
+    invoice = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(invoice.count).to eq(4)
+  end
+
+  it 'can return all invoices matching a customer_id param' do
+    create(:customer, id: 1)
+    create(:customer, id: 2)
+    create(:invoice, customer_id: 1)
+    create_list(:invoice, 8, customer_id: 2)
+
+    customer_id = Invoice.last.customer_id
+
+    get "/api/v1/invoices/find_all?customer_id=#{customer_id}"
+
+    invoice = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(invoice.count).to eq(8)
+  end
+
+  skip 'can return all invoices matching a created_at param' do
+    create(:invoice, created_at: Date.yesterday)
+    create_list(:invoice, 3, created_at: Date.today)
+    created_at = Invoice.last.created_at
+
+    get "/api/v1/invoices/find_all?created_at=#{created_at}"
+
+    invoice = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(invoice.count).to eq(3)
+  end
+
+  skip 'can return all invoices matching a updated_at param' do
+    create(:invoice, created_at: Date.yesterday)
+    create_list(:invoice, 3, created_at: Date.today)
+    updated_at = Invoice.last.updated_at
+
+    get "/api/v1/invoices/find_all?updated_at=#{updated_at}"
+
+    invoice = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(invoice.count).to eq(3)
+  end
 end
