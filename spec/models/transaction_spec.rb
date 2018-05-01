@@ -34,4 +34,55 @@ RSpec.describe Transaction, type: :model do
       end
     end
   end
+
+  describe "queries" do
+    it 'finds a merchants total revenue' do
+      merchant_list = create_list(:merchant, 10)
+      merchant_list.each do |merchant|
+        5.times do
+          invoice = create(:invoice, merchant_id: merchant.id)
+          3.times do
+            create(:invoice_item, invoice_id: invoice.id)
+          end
+        end
+      end
+
+      successful_invoices = merchant_list[0].invoices.find_all do |invoice|
+        invoice.status == "Success"
+      end
+
+      invoice_items = successful_invoices.map do |invoice|
+        invoice.invoice_items
+      end.flatten
+
+      total_revenue = invoice_items.map(&:price).sum
+
+      expect(Merchant.find(merchant_list[0].id).single_merchant_revenue).to eq(total_revenue)
+    end
+
+    it 'finds a merchants total revenue for particular date' do
+      skip
+      merchant_list = create_list(:merchant, 10)
+      merchant_list.each do |merchant|
+        5.times do
+          invoice = create(:invoice, merchant_id: merchant.id)
+          3.times do
+            create(:invoice_item, invoice_id: invoice.id)
+          end
+        end
+      end
+
+      successful_invoices = merchant_list[0].invoices.find_all do |invoice|
+        invoice.status == "Success"
+      end
+
+      invoice_items = successful_invoices.map do |invoice|
+        invoice.invoice_items
+      end.flatten
+
+      total_revenue = invoice_items.map(&:price).sum
+
+      expect(Merchant.find(merchant_list[0].id).single_merchant_revenue_date(Time.now)).to eq(total_revenue)
+    end
+  end
 end
