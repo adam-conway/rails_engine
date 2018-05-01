@@ -7,8 +7,8 @@ Rails.application.routes.draw do
         get '/random', to: 'random#show'
       end
       resources :merchants, only: [:index, :show]
+      resources :invoices, only: [:index]
+      end
     end
-  end
-
-  # get "/api/v1/merchants/find", to: 'search#find'
+  end  
 end
