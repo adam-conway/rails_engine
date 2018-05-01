@@ -137,11 +137,11 @@ describe "Merchants API" do
 
     it "can get all merchants based on updated_at" do
       date = "2018-04-30 10:45:00 UTC"
-      merchant1 = create(:merchant, update_at: "2018-04-30 10:45:00 UTC")
-      merchant2 = create(:merchant, update_at: "2018-04-30 10:45:00 UTC")
+      merchant1 = create(:merchant, updated_at: "2018-04-30 10:45:00 UTC")
+      merchant2 = create(:merchant, updated_at: "2018-04-30 10:45:00 UTC")
       merchant3 = create(:merchant)
 
-      get "/api/v1/merchants/find_all?update_at=#{date}"
+      get "/api/v1/merchants/find_all?updated_at=#{date}"
 
       merchants = JSON.parse(response.body)
 
@@ -150,5 +150,15 @@ describe "Merchants API" do
       expect(merchants.first["id"]).to eq(merchant1.id)
       expect(merchants.last["id"]).to eq(merchant2.id)
     end
+  end
+  it "Finds a random merchant" do
+    merchant_list = create_list(:merchant, 10)
+
+    get "/api/v1/merchants/random.json"
+
+    merchant = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(merchant_list.map(&:id).include?(merchant["id"]))
   end
 end
