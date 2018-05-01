@@ -3,8 +3,10 @@ describe 'Merchants API' do
     it 'can return all items associated with a merchant' do
       create(:merchant)
       id = Merchant.last.id
+      id_2 = id + 1
+      create(:merchant, id: id_2)
       create_list(:item, 6, merchant_id: id)
-
+      create_list(:item, 6, merchant_id: id_2)
       get "/api/v1/merchants/#{id}/items"
 
       items = JSON.parse(response.body)
@@ -16,7 +18,10 @@ describe 'Merchants API' do
     it 'can return all invoices associated with a merchant' do
       create(:merchant)
       id = Merchant.last.id
+      id_2 = id + 1
+      create(:merchant, id: id_2)
       create_list(:invoice, 5, merchant_id: id)
+      create_list(:invoice, 5, merchant_id: id_2)
 
       get "/api/v1/merchants/#{id}/invoices"
 
