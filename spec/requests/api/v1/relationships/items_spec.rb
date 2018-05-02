@@ -3,8 +3,6 @@ require 'rails_helper'
 describe 'Items API' do
   describe 'relationships' do
     it 'can return merchant associated with an item' do
-      #waiting for items to get finished
-      skip
       merchant1 = create(:merchant)
       merchant2 = create(:merchant)
       merchant3 = create(:merchant)
@@ -21,7 +19,6 @@ describe 'Items API' do
     end
 
     it 'can return invoice_items associated with an item' do
-      skip
       item_list = create_list(:item, 3)
       10.times do
         create(:invoice_item, item: item_list.sample)
