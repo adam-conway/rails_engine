@@ -126,7 +126,7 @@ describe "Transactions API" do
       expect(factory_transactions).to eq(response_transactions)
     end
 
-    it "can get all transactions based on result" do
+    skip "can get all transactions based on result" do
       transaction_list = create_list(:transaction, 10)
       search_param = "Success"
       factory_transactions = transaction_list.find_all do |transaction|

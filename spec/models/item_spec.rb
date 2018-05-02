@@ -4,25 +4,25 @@ RSpec.describe Item, type: :model do
   describe 'validations' do
     it {should validate_presence_of(:name)}
     it {should validate_presence_of(:description)}
-    it {should validate_presence_of(:price)}
+    it {should validate_presence_of(:unit_price)}
     it {should belong_to(:merchant)}
     it {should have_many(:invoices).through(:invoice_items)}
   end
 
   describe 'field validations' do
     it 'is invalid without a name' do
-      item = Item.create(description: 'description', price: 100)
+      item = Item.create(description: 'description', unit_price: 100)
 
       expect(item).to_not be_valid
     end
 
     it 'is invalid without a description' do
-      item = Item.create(name: 'item', price: 100)
+      item = Item.create(name: 'item', unit_price: 100)
 
       expect(item).to_not be_valid
     end
 
-    it 'is invalid without a price' do
+    it 'is invalid without a unit_price' do
       item = Item.create(name: 'item', description: 'description')
 
       expect(item).to_not be_valid
