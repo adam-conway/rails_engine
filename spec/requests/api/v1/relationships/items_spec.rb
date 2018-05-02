@@ -20,20 +20,19 @@ describe 'Items API' do
       expect(merchant.id).to eq(merchant2.id)
     end
 
-    # it 'can return all invoice_items associated with an item' do
-    #   create(:item)
-    #   id = Item.last.id
-    #   id_2 = id + 1
-    #   create(:item, id: id_2)
-    #   create_list(:invoice, 5, item_id: id)
-    #   create_list(:invoice, 5, item_id: id_2)
-    #
-    #   get "/api/v1/items/#{id}/invoices"
-    #
-    #   items = JSON.parse(response.body)
-    #
-    #   expect(response).to be_success
-    #   expect(items.count).to eq(5)
-    # end
+    it 'can return invoice_items associated with an item' do
+      skip
+      item_list = create_list(:item, 3)
+      10.times do
+        create(:invoice_item, item: item_list.sample)
+      end
+
+      get "/api/v1/items/#{item_list[2].id}/invoice_items"
+
+      invoice_items = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(item_list[2].invoice_items.count).to eq(invoice_items.count)
+    end
   end
 end
