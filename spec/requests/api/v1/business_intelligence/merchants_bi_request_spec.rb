@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe "Merchants BI API" do
   describe "Single Merchant" do
-    skip "Sends total revenue for a merchant" do
+    it "Sends total revenue for a merchant" do
       merchant = create(:merchant)
       invoice_list = create_list(:invoice, 10, merchant: merchant, status: "Success")
       invoice_item_list = create_list(:invoice_item, 10, invoice: invoice_list.sample)
