@@ -36,6 +36,30 @@ describe 'Items API' do
     expect(item["id"]).to eq(id)
   end
 
+  it 'can return single item by passing name param' do
+    create(:item)
+    name = Item.last.name
+
+    get "/api/v1/items/find?name=#{name}"
+
+    item = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(item["name"]).to eq(name)
+  end
+
+  it 'can return single item by passing name param; case-insensitive' do
+    create(:item)
+    name = Item.last.name
+
+    get "/api/v1/items/find?name=#{name.upcase}"
+
+    item = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(item["name"]).to eq(name)
+  end
+
   it 'can return single item by passing description param' do
     create(:item)
     description = Item.last.description
@@ -121,6 +145,32 @@ describe 'Items API' do
 
     expect(response).to be_success
     expect(items.count).to eq(1)
+  end
+
+  it 'can return all items matching an name param' do
+    create(:item)
+    create_list(:item, 3, name: "Name")
+    name = Item.last.name
+
+    get "/api/v1/items/find_all?name=#{name}"
+
+    items = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(items.count).to eq(3)
+  end
+
+  it 'can return all items matching an name param; case-insensitive' do
+    create(:item)
+    create_list(:item, 3, name: "Name")
+    name = Item.last.name
+
+    get "/api/v1/items/find_all?name=#{name.upcase}"
+
+    items = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(items.count).to eq(3)
   end
 
   it 'can return all items matching a description param' do
