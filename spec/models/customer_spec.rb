@@ -24,11 +24,25 @@ RSpec.describe Customer, type: :model do
       end
     end
     context 'valid attributes' do
-      it 'is valid with all attributesß' do
+      it 'is valid with all attributes' do
         customer = create(:customer)
 
         expect(customer).to be_valid
       end
+    end
+  end
+
+  describe 'class methods' do
+    it '.transactions' do
+      customer_1 = create(:customer, id: 1)
+      customer_1_invoice = create(:invoice, id: 1, customer_id: 1)
+      customer_1_transactions = create_list(:transaction, 3, invoice_id: 1)
+
+      customer_2 = create(:customer, id: 2)
+      customer_2_invoice = create(:invoice, id: 2, customer_id: 2)
+      customer_2_transactions = create_list(:transaction, 3, invoice_id: 2)
+
+      expect(customer_1.transactions).to eq(customer_1_transactions)
     end
   end
 end

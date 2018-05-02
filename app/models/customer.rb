@@ -3,4 +3,8 @@ class Customer < ApplicationRecord
                         :last_name
 
   has_many :invoices
+
+  def transactions
+    Transaction.joins(:invoice).where("invoices.customer_id = #{id}")
+  end
 end
