@@ -1,22 +1,21 @@
 require 'rails_helper'
 
-describe "Merchants API" do
+describe "Merchants BI API" do
+  describe "Single Merchant" do
+    it "Sends total revenue for a merchant" do
+      merchant = create(:merchant)
+      invoice_list = create_list(:invoice, 10, merchant: merchant, status: "Success")
+      invoice_item_list = create_list(:invoice_item, 10, invoice: invoice_list.sample)
 
-  it "sends a list of merchants" do
-    merchant_list = create_list(:merchant, 10)
-    merchant_list.each do |merchant|
-      5.times do
-        invoice = create(:invoice, merchant_id: merchant.id)
-        3.times do
-          create(:invoice_item, invoice_id: invoice.id)
-        end
-      end
+      get "/api/v1/merchants/#{merchant.id}/revenue"
+
+      expectation = invoice_item_list.map(&:price).sum
+      
+      expect(response).to be_success
+
+      revenue = JSON.parse(response.body)
+
+      expect(expectation).to eq(revenue)
     end
-
-    get '/api/v1/merchants'
-
-    expect(response).to be_success
-
-    merchants = JSON.parse(response.body)
   end
 end
