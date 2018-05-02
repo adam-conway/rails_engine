@@ -15,7 +15,7 @@ describe 'Items API' do
       merchant = JSON.parse(response.body)
 
       expect(response).to be_success
-      expect(merchant.id).to eq(merchant2.id)
+      expect(merchant["id"]).to eq(merchant2.id)
     end
 
     it 'can return invoice_items associated with an item' do

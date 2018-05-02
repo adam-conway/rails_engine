@@ -9,8 +9,8 @@ describe "Merchants BI API" do
 
       get "/api/v1/merchants/#{merchant.id}/revenue"
 
-      expectation = invoice_item_list.map(&:price).sum
-      
+      expectation = invoice_item_list.map(&:unit_price).sum
+
       expect(response).to be_success
 
       revenue = JSON.parse(response.body)
