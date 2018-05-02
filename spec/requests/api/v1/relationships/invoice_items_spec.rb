@@ -12,7 +12,7 @@ describe 'Invoice items API' do
       invoice = JSON.parse(response.body)
 
       expect(response).to be_success
-      expect(invoice).to eq(invoice_item.invoice)
+      expect(invoice["id"]).to eq(invoice_item.invoice.id)
     end
     it 'can return item associated with an invoice_item' do
       invoice_list = create_list(:invoice, 6)
@@ -24,7 +24,7 @@ describe 'Invoice items API' do
       item = JSON.parse(response.body)
 
       expect(response).to be_success
-      expect(item).to eq(invoice_item.item)
+      expect(item["id"]).to eq(invoice_item.item.id)
     end
   end
 end

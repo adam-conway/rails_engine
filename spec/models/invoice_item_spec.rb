@@ -3,14 +3,14 @@ require 'rails_helper'
 RSpec.describe InvoiceItem, type: :model do
   describe 'validations' do
     it{should validate_presence_of(:quantity)}
-    it{should validate_presence_of(:price)}
+    it{should validate_presence_of(:unit_price)}
     it{should belong_to(:item)}
     it{should belong_to(:invoice)}
   end
 
   describe 'field validations' do
     it 'should be invalid without a quantity' do
-      invoice_item = InvoiceItem.create(price: 100)
+      invoice_item = InvoiceItem.create(unit_price: 100)
 
       expect(invoice_item).to_not be_valid
     end
@@ -26,7 +26,5 @@ RSpec.describe InvoiceItem, type: :model do
 
       expect(invoice_item).to be_valid
     end
-
-
   end
 end

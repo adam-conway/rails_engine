@@ -84,9 +84,9 @@ describe 'Items API' do
     expect(item["description"]).to eq(description)
   end
 
-  skip 'can return single item by passing unit_price param' do
+  it 'can return single item by passing unit_price param' do
     create(:item)
-    unit_price = Item.last.unit_price
+    unit_price = Item.last.unit_price.to_s
 
     get "/api/v1/items/find?unit_price=#{unit_price}"
 

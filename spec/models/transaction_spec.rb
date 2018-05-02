@@ -55,7 +55,7 @@ RSpec.describe Transaction, type: :model do
         invoice.invoice_items
       end.flatten
 
-      total_revenue = invoice_items.map(&:price).sum
+      total_revenue = invoice_items.map(&:unit_price).sum
 
       expect(Merchant.find(merchant_list[0].id).single_merchant_revenue).to eq(total_revenue)
     end
@@ -80,7 +80,7 @@ RSpec.describe Transaction, type: :model do
         invoice.invoice_items
       end.flatten
 
-      total_revenue = invoice_items.map(&:price).sum
+      total_revenue = invoice_items.map(&:unit_price).sum
 
       expect(Merchant.find(merchant_list[0].id).single_merchant_revenue_date(Time.now)).to eq(total_revenue)
     end
