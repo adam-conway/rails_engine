@@ -56,7 +56,7 @@ describe "Merchants BI API" do
 
       get "/api/v1/merchants/#{merchant.id}/favorite_customer"
 
-      favorite_customer = JSON.parse(response.body).first
+      favorite_customer = JSON.parse(response.body)
 
       expect(favorite_customer["id"]).to eq(customer_2.id)
       expect(favorite_customer["first_name"]).to eq(customer_2.first_name)

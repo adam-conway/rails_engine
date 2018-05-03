@@ -64,7 +64,7 @@ RSpec.describe Merchant, type: :model do
       create_list(:transaction, 4, invoice_id: "#{customer_2_invoice.id}", result: "success")
       create_list(:transaction, 3, invoice_id: "#{customer_2_invoice.id}", result: "failed")
 
-      expect(merchant.favorite_customer.first). to eq(customer_2)
+      expect(merchant.favorite_customer). to eq(customer_2)
     end
   end
 end
