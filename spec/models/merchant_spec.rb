@@ -25,27 +25,16 @@ RSpec.describe Merchant, type: :model do
 
   describe "queries" do
     it 'finds a merchants total revenue' do
-      merchant_list = create_list(:merchant, 10)
-      merchant_list.each do |merchant|
-        5.times do
-          invoice = create(:invoice, merchant_id: merchant.id)
-          3.times do
-            create(:invoice_item, invoice_id: invoice.id)
-          end
-        end
-      end
+      merchant = create(:merchant)
+      invoice_list = create_list(:invoice, 3, merchant: merchant)
+      create(:transaction, invoice: invoice_list[0], result: "Success")
+      create(:transaction, invoice: invoice_list[1], result: "Success")
+      create(:transaction, invoice: invoice_list[2], result: "Failed")
+      create(:invoice_item, invoice: invoice_list[0], unit_price: 100, quantity: 100)
+      create(:invoice_item, invoice: invoice_list[1], unit_price: 100, quantity: 100)
+      create(:invoice_item, invoice: invoice_list[2], unit_price: 1234, quantity: 1345)
 
-      successful_invoices = merchant_list[0].invoices.find_all do |invoice|
-        invoice.status == "Success"
-      end
-
-      invoice_items = successful_invoices.map do |invoice|
-        invoice.invoice_items
-      end.flatten
-
-      total_revenue = invoice_items.map(&:unit_price).sum
-
-      expect(Merchant.find(merchant_list[0].id).single_merchant_revenue).to eq(total_revenue)
+      expect(merchant.single_merchant_revenue.revenue.to_f).to eq(200)
     end
   end
 end
