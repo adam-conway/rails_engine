@@ -83,5 +83,28 @@ describe "Merchants BI API" do
 
       expect({"revenue"=>"10000.0"}).to eq(revenue)
     end
+
+    it "Sends top merchants by items sold" do
+      merchant1 = create(:merchant)
+      merchant2 = create(:merchant)
+      merchant3 = create(:merchant)
+      invoice1 = create(:invoice, merchant: merchant1)
+      invoice2 = create(:invoice, merchant: merchant2)
+      invoice3 = create(:invoice, merchant: merchant3)
+      create(:transaction, invoice: invoice1, result: "Success")
+      create(:transaction, invoice: invoice2, result: "Success")
+      create(:transaction, invoice: invoice3, result: "Failed")
+      create(:invoice_item, invoice: invoice1, unit_price: 100, quantity: 100)
+      create(:invoice_item, invoice: invoice2, unit_price: 100, quantity: 1345)
+      create(:invoice_item, invoice: invoice3, unit_price: 1234, quantity: 2000)
+
+      get "/api/v1/merchants/most_items?quantity=1"
+
+      expect(response).to be_success
+
+      merchants = JSON.parse(response.body)
+
+      expect(merchants.first.has_value?(merchant2.id))
+    end
   end
 end
