@@ -13,4 +13,5 @@ class Customer < ApplicationRecord
       .group("merchants.id")
       .order("count(merchant_id) DESC")[0]
   end
+  
 end
