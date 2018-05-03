@@ -33,7 +33,7 @@ class Merchant < ApplicationRecord
   def favorite_customer
     customers
       .joins(:transactions)
-      .where(transactions: {result: "Success"})
+      .merge(Transaction.successful)
       .group(:id)
       .order("count(transactions.id) DESC")
       .limit(1)
