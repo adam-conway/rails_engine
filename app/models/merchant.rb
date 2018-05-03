@@ -14,7 +14,6 @@ class Merchant < ApplicationRecord
       .where(transactions: {result: "Success"})[0]
   end
 
-<<<<<<< HEAD
   def customers_with_pending_invoices
     Customer.find_by_sql ["SELECT customers.* FROM merchants
                           JOIN invoices ON merchants.id = invoices.merchant_id
@@ -37,13 +36,13 @@ class Merchant < ApplicationRecord
       .order("count(transactions.id) DESC")
       .limit(1)
       .first
-=======
+  end
+
   def single_merchant_revenue_by_date(date)
     invoices
       .select("sum(invoice_items.unit_price * invoice_items.quantity/100) AS revenue")
       .joins(:transactions, :invoice_items)
       .where("Date(invoices.created_at) = ?", date)
       .where(transactions: {result: "Success"})[0]
->>>>>>> Finished implementation for filtering a merchant by date
   end
 end
