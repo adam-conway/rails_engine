@@ -3,4 +3,6 @@ class Transaction < ApplicationRecord
                         :result
 
   belongs_to :invoice
+
+  scope :successful, -> { where(result: "Success") }
 end
