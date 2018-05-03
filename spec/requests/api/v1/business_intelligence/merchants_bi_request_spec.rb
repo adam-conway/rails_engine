@@ -65,15 +65,17 @@ describe "Merchants BI API" do
 
     it "Sends total revenue for a merchant filtered by date" do
       merchant = create(:merchant)
-      invoice_list = create_list(:invoice, 3, merchant: merchant)
-      create(:transaction, invoice: invoice_list[0], result: "Success")
-      invoice = create(:transaction, invoice: invoice_list[1], result: "Success", created_at: "2017-06-30 10:45:00 UTC")
-      create(:transaction, invoice: invoice_list[2], result: "Failed")
-      create(:invoice_item, invoice: invoice_list[0], unit_price: 100, quantity: 100)
-      create(:invoice_item, invoice: invoice_list[1], unit_price: 100, quantity: 100)
-      create(:invoice_item, invoice: invoice_list[2], unit_price: 1234, quantity: 1345)
+      invoice1 = create(:invoice, merchant: merchant)
+      invoice2 = create(:invoice, merchant: merchant, created_at: "2017-06-30 10:45:00 UTC")
+      invoice3 = create(:invoice, merchant: merchant)
+      create(:transaction, invoice: invoice1, result: "Success")
+      create(:transaction, invoice: invoice2, result: "Success")
+      create(:transaction, invoice: invoice3, result: "Failed")
+      create(:invoice_item, invoice: invoice1, unit_price: 100, quantity: 100)
+      create(:invoice_item, invoice: invoice2, unit_price: 100, quantity: 100)
+      create(:invoice_item, invoice: invoice3, unit_price: 1234, quantity: 1345)
 
-      get "/api/v1/merchants/#{merchant.id}/revenue?date=#{invoice.created_at}"
+      get "/api/v1/merchants/#{merchant.id}/revenue?date=#{invoice2.created_at}"
 
       expect(response).to be_success
 
