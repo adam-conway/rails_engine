@@ -14,6 +14,15 @@ class Item < ApplicationRecord
       .limit(quantity)
   end
 
+  def self.most_sold_items(limit = 5)
+    select('items.*, sum(invoice_items.quantity) AS total_sold')
+      .joins(invoice_items: [:invoice])
+      .merge(Invoice.successful)
+      .group(:id)
+      .order('total_sold DESC')
+      .limit(limit)
+  end
+
   def best_day
     invoices
       .successful
