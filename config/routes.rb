@@ -6,10 +6,12 @@ Rails.application.routes.draw do
         get '/find_all', to: 'search#index'
         get '/random', to: 'random#show'
       end
+
       resources :merchants, only: [:index, :show] do
         get '/items/', to: 'merchants/items#index'
         get '/invoices/', to: 'merchants/invoices#index'
         get '/revenue/', to: 'merchants/revenue#show'
+        get '/customers_with_pending_invoices', to: 'merchants/customers#index'
       end
 
       namespace :customers do
