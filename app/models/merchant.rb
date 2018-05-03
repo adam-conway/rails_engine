@@ -5,7 +5,7 @@ class Merchant < ApplicationRecord
   has_many :customers, through: :invoices
   has_many :invoice_items, through: :invoices
 
-  def revenue
+  def single_merchant_revenue
     # @revenue ||= invoices
     #   .joins(:transactions, :invoice_items)
     #   .where(transactions: {result: "Success"})
