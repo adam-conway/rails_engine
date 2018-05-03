@@ -5,7 +5,7 @@ class Merchant < ApplicationRecord
   has_many :customers, through: :invoices
   has_many :invoice_items, through: :invoices
 
-  def single_merchant_revenue
+  def revenue
     # @revenue ||= invoices
     #   .joins(:transactions, :invoice_items)
     #   .where(transactions: {result: "Success"})
@@ -47,7 +47,7 @@ class Merchant < ApplicationRecord
       .where("Date(invoices.created_at) = ?", date)
       .where(transactions: {result: "Success"})[0]
   end
-  
+
   def self.most_items(quantity = 5)
     joins(invoices: [:invoice_items, :transactions])
       .merge(Transaction.successful)
@@ -61,4 +61,15 @@ class Merchant < ApplicationRecord
       .merge(Invoice.successful).where("Date(invoices.created_at) = ?", date)
       .sum("invoice_items.quantity * invoice_items.unit_price")
   end
+
+  def self.most_revenue(quantity = 5)
+    joins(invoices: [:invoice_items])
+      .merge(Invoice.successful)
+      .group(:id)
+      .order("sum(invoice_items.quantity * invoice_items.unit_price) DESC")
+      .limit(quantity)
+  end
 end
+
+
+# GET /api/v1/merchants/most_revenue?quantity=x
