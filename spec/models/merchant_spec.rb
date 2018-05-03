@@ -51,5 +51,20 @@ RSpec.describe Merchant, type: :model do
 
       expect(merchant.customers_with_pending_invoices.first). to eq(customer_1)
     end
+
+    it '.favorite_customer' do
+      merchant = create(:merchant, id: 1)
+      customer_1 = create(:customer, id: 1)
+      customer_2 = create(:customer, id: 2)
+
+      customer_1_invoice = customer_1.invoices.create!(merchant_id: "#{merchant.id}", status: "good")
+      customer_2_invoice = customer_2.invoices.create!(merchant_id: "#{merchant.id}", status: "good")
+
+      create_list(:transaction, 3, invoice_id: "#{customer_1_invoice.id}", result: "failed")
+      create_list(:transaction, 4, invoice_id: "#{customer_2_invoice.id}", result: "success")
+      create_list(:transaction, 3, invoice_id: "#{customer_2_invoice.id}", result: "failed")
+
+      expect(merchant.favorite_customer.first). to eq(customer_2)
+    end
   end
 end
