@@ -55,5 +55,34 @@ describe "Items BI API" do
 
       expect(day).to eq({"best_day"=>"2018-04-30T10:45:00.000Z"})
     end
+
+    it '.most sold item' do
+      item1 = create(:item)
+      item2 = create(:item)
+      item3 = create(:item)
+      invoice1 = create(:invoice)
+      invoice2 = create(:invoice)
+      invoice3 = create(:invoice)
+
+      create(:invoice_item, invoice: invoice1, item: item1, unit_price: 100, quantity: 1)
+      create(:invoice_item, invoice: invoice2, item: item2, unit_price: 100, quantity: 3)
+      create(:invoice_item, invoice: invoice3, item: item3, unit_price: 100, quantity: 1)
+
+      create(:transaction, invoice: invoice1, result: "Success")
+      create(:transaction, invoice: invoice2, result: "Success")
+      create(:transaction, invoice: invoice3, result: "Success")
+
+      expected = [{"id"=>item2.id,
+        "name"=>item2.name,
+        "description"=>item2.description,
+        "merchant_id"=>item2.merchant_id,
+        "unit_price"=>item2.unit_price.to_s}]
+
+      get "/api/v1/items/most_items?quantity=1"
+
+      item = JSON.parse(response.body)
+
+      expect(item).to eq(expected)
+    end
   end
 end
