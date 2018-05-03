@@ -39,7 +39,28 @@ describe "Merchants BI API" do
 
       expect(customers["id"]).to eq(customer_1.id)
       expect(customers["first_name"]).to eq(customer_1.first_name)
-      expect(customers["last_name"]).to eq(customer_1.last_name)      
+      expect(customers["last_name"]).to eq(customer_1.last_name)
+    end
+
+    it 'favorite customer' do
+      merchant = create(:merchant, id: 1)
+      customer_1 = create(:customer, id: 1)
+      customer_2 = create(:customer, id: 2)
+
+      customer_1_invoice = customer_1.invoices.create!(merchant_id: "#{merchant.id}", status: "good")
+      customer_2_invoice = customer_2.invoices.create!(merchant_id: "#{merchant.id}", status: "good")
+
+      create_list(:transaction, 3, invoice_id: "#{customer_1_invoice.id}", result: "failed")
+      create_list(:transaction, 4, invoice_id: "#{customer_2_invoice.id}", result: "success")
+      create_list(:transaction, 3, invoice_id: "#{customer_2_invoice.id}", result: "failed")
+
+      get "/api/v1/merchants/#{merchant.id}/favorite_customer"
+
+      favorite_customer = JSON.parse(response.body).first
+
+      expect(favorite_customer["id"]).to eq(customer_2.id)
+      expect(favorite_customer["first_name"]).to eq(customer_2.first_name)
+      expect(favorite_customer["last_name"]).to eq(customer_2.last_name)
     end
   end
 end

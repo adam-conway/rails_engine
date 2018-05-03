@@ -29,4 +29,13 @@ class Merchant < ApplicationRecord
                           WHERE merchants.id = #{id} and transactions.result = 'success';"]
 
   end
+
+  def favorite_customer
+    customers
+      .joins(:transactions)
+      .where(transactions: {result: "Success"})
+      .group("customers.id")
+      .order("count(transactions.id) DESC")
+      .limit(1)
+  end
 end
