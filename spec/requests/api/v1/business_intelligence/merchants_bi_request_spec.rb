@@ -62,5 +62,24 @@ describe "Merchants BI API" do
       expect(favorite_customer["first_name"]).to eq(customer_2.first_name)
       expect(favorite_customer["last_name"]).to eq(customer_2.last_name)
     end
+
+    it "Sends total revenue for a merchant filtered by date" do
+      merchant = create(:merchant)
+      invoice_list = create_list(:invoice, 3, merchant: merchant)
+      create(:transaction, invoice: invoice_list[0], result: "Success")
+      invoice = create(:transaction, invoice: invoice_list[1], result: "Success", created_at: "2017-06-30 10:45:00 UTC")
+      create(:transaction, invoice: invoice_list[2], result: "Failed")
+      create(:invoice_item, invoice: invoice_list[0], unit_price: 100, quantity: 100)
+      create(:invoice_item, invoice: invoice_list[1], unit_price: 100, quantity: 100)
+      create(:invoice_item, invoice: invoice_list[2], unit_price: 1234, quantity: 1345)
+
+      get "/api/v1/merchants/#{merchant.id}/revenue?date=#{invoice.created_at}"
+
+      expect(response).to be_success
+
+      revenue = JSON.parse(response.body)
+
+      expect({"revenue"=>"100.0"}).to eq(revenue)
+    end
   end
 end
