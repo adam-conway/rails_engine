@@ -22,4 +22,19 @@ RSpec.describe Merchant, type: :model do
       end
     end
   end
+
+  describe "queries" do
+    it 'finds a merchants total revenue' do
+      merchant = create(:merchant)
+      invoice_list = create_list(:invoice, 3, merchant: merchant)
+      create(:transaction, invoice: invoice_list[0], result: "Success")
+      create(:transaction, invoice: invoice_list[1], result: "Success")
+      create(:transaction, invoice: invoice_list[2], result: "Failed")
+      create(:invoice_item, invoice: invoice_list[0], unit_price: 100, quantity: 100)
+      create(:invoice_item, invoice: invoice_list[1], unit_price: 100, quantity: 100)
+      create(:invoice_item, invoice: invoice_list[2], unit_price: 1234, quantity: 1345)
+
+      expect(merchant.single_merchant_revenue.revenue.to_f).to eq(200)
+    end
+  end
 end

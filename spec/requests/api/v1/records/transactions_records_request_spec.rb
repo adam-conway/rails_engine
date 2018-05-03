@@ -126,19 +126,24 @@ describe "Transactions API" do
       expect(factory_transactions).to eq(response_transactions)
     end
 
-    skip "can get all transactions based on result" do
-      transaction_list = create_list(:transaction, 10)
-      search_param = "Success"
-      factory_transactions = transaction_list.find_all do |transaction|
-        transaction.result == search_param
-      end
+    it "can get all transactions based on result" do
+      create(:transaction, result: "Success")
+      create(:transaction, result: "Success")
+      expected = create(:transaction, result: "Failed")
+      search_param = "Failed"
 
       get "/api/v1/transactions/find_all?result=#{search_param}"
 
-      response_transactions = JSON.parse(response.body)
+      response_transaction = JSON.parse(response.body)
+      expectation = [{
+        "credit_card_number" => "#{expected.credit_card_number}",
+        "id" => expected.id,
+        "invoice_id" => expected.invoice_id,
+        "result" => "#{expected.result}"
+      }]
 
       expect(response).to be_success
-      expect(factory_transactions).to eq(response_transactions)
+      expect(response_transaction).to eq(expectation)
     end
 
     it "can get all transactions based on invoice_id" do
