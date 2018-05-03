@@ -18,7 +18,7 @@ describe "Merchants BI API" do
 
       revenue = JSON.parse(response.body)
 
-      expect({"revenue"=>"200.0"}).to eq(revenue)
+      expect({"revenue"=>"20000.0"}).to eq(revenue)
     end
 
     it 'customers with pending invoices' do
@@ -61,6 +61,27 @@ describe "Merchants BI API" do
       expect(favorite_customer["id"]).to eq(customer_2.id)
       expect(favorite_customer["first_name"]).to eq(customer_2.first_name)
       expect(favorite_customer["last_name"]).to eq(customer_2.last_name)
+    end
+
+    it "Sends total revenue for a merchant filtered by date" do
+      merchant = create(:merchant)
+      invoice1 = create(:invoice, merchant: merchant)
+      invoice2 = create(:invoice, merchant: merchant, created_at: "2017-06-30 10:45:00 UTC")
+      invoice3 = create(:invoice, merchant: merchant)
+      create(:transaction, invoice: invoice1, result: "Success")
+      create(:transaction, invoice: invoice2, result: "Success")
+      create(:transaction, invoice: invoice3, result: "Failed")
+      create(:invoice_item, invoice: invoice1, unit_price: 100, quantity: 100)
+      create(:invoice_item, invoice: invoice2, unit_price: 100, quantity: 100)
+      create(:invoice_item, invoice: invoice3, unit_price: 1234, quantity: 1345)
+
+      get "/api/v1/merchants/#{merchant.id}/revenue?date=#{invoice2.created_at}"
+
+      expect(response).to be_success
+
+      revenue = JSON.parse(response.body)
+
+      expect({"revenue"=>"10000.0"}).to eq(revenue)
     end
   end
 end

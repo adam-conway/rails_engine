@@ -34,7 +34,7 @@ RSpec.describe Merchant, type: :model do
       create(:invoice_item, invoice: invoice_list[1], unit_price: 100, quantity: 100)
       create(:invoice_item, invoice: invoice_list[2], unit_price: 1234, quantity: 1345)
 
-      expect(merchant.single_merchant_revenue.revenue.to_f).to eq(200)
+      expect(merchant.single_merchant_revenue.revenue.to_f).to eq(20000)
     end
 
     it '.customers_with_pending_invoices' do
@@ -65,6 +65,23 @@ RSpec.describe Merchant, type: :model do
       create_list(:transaction, 3, invoice_id: "#{customer_2_invoice.id}", result: "failed")
 
       expect(merchant.favorite_customer). to eq(customer_2)
+    end
+
+    it 'finds a merchants total revenue by date' do
+      merchant = create(:merchant)
+      invoice1 = create(:invoice, merchant: merchant)
+      invoice2 = create(:invoice, merchant: merchant, created_at: "2017-06-30 10:45:00 UTC")
+      invoice3 = create(:invoice, merchant: merchant)
+      create(:transaction, invoice: invoice1, result: "Success")
+      create(:transaction, invoice: invoice2, result: "Success")
+      create(:transaction, invoice: invoice3, result: "Failed")
+      create(:invoice_item, invoice: invoice1, unit_price: 100, quantity: 100)
+      create(:invoice_item, invoice: invoice2, unit_price: 100, quantity: 100)
+      create(:invoice_item, invoice: invoice3, unit_price: 1234, quantity: 1345)
+
+      search_param = "2017-6-30"
+
+      expect(merchant.single_merchant_revenue_by_date(search_param).revenue.to_f).to eq(10000)
     end
   end
 end
