@@ -18,7 +18,7 @@ describe "Merchants BI API" do
 
       revenue = JSON.parse(response.body)
 
-      expect({"revenue"=>"200.0"}).to eq(revenue)
+      expect({"revenue"=>"20000.0"}).to eq(revenue)
     end
 
     it 'customers with pending invoices' do
@@ -81,7 +81,7 @@ describe "Merchants BI API" do
 
       revenue = JSON.parse(response.body)
 
-      expect({"revenue"=>"100.0"}).to eq(revenue)
+      expect({"revenue"=>"10000.0"}).to eq(revenue)
     end
   end
 end

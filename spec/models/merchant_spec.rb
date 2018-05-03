@@ -34,7 +34,7 @@ RSpec.describe Merchant, type: :model do
       create(:invoice_item, invoice: invoice_list[1], unit_price: 100, quantity: 100)
       create(:invoice_item, invoice: invoice_list[2], unit_price: 1234, quantity: 1345)
 
-      expect(merchant.single_merchant_revenue.revenue.to_f).to eq(200)
+      expect(merchant.single_merchant_revenue.revenue.to_f).to eq(20000)
     end
 
     it '.customers_with_pending_invoices' do
@@ -81,7 +81,7 @@ RSpec.describe Merchant, type: :model do
 
       search_param = "2017-6-30"
 
-      expect(merchant.single_merchant_revenue_by_date(search_param).revenue.to_f).to eq(100)
+      expect(merchant.single_merchant_revenue_by_date(search_param).revenue.to_f).to eq(10000)
     end
   end
 end

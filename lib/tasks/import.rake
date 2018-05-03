@@ -5,10 +5,10 @@ namespace :import do
   task all: :environment do
     InvoiceItem.destroy_all
     Item.destroy_all
+    Transaction.destroy_all
     Invoice.destroy_all
     Merchant.destroy_all
     Customer.destroy_all
-    Transaction.destroy_all
 
     ActiveRecord::Base.connection.reset_pk_sequence!(:table_name)
 

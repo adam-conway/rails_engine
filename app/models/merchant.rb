@@ -1,5 +1,3 @@
-require_relative 'intelligence'
-
 class Merchant < ApplicationRecord
   validates_presence_of :name
   has_many :items
@@ -9,7 +7,7 @@ class Merchant < ApplicationRecord
 
   def single_merchant_revenue
     invoices
-      .select("sum(invoice_items.unit_price * invoice_items.quantity/100) AS revenue")
+      .select("sum(invoice_items.unit_price * invoice_items.quantity) AS revenue")
       .joins(:transactions, :invoice_items)
       .where(transactions: {result: "Success"})[0]
   end
@@ -40,7 +38,7 @@ class Merchant < ApplicationRecord
 
   def single_merchant_revenue_by_date(date)
     invoices
-      .select("sum(invoice_items.unit_price * invoice_items.quantity/100) AS revenue")
+      .select("sum(invoice_items.unit_price * invoice_items.quantity) AS revenue")
       .joins(:transactions, :invoice_items)
       .where("Date(invoices.created_at) = ?", date)
       .where(transactions: {result: "Success"})[0]
