@@ -43,4 +43,11 @@ class Merchant < ApplicationRecord
       .where("Date(invoices.created_at) = ?", date)
       .where(transactions: {result: "Success"})[0]
   end
+
+  def self.most_items(quantity = 5)
+    joins(:invoices, :invoice_items)
+      .order("sum(invoice_items.quantity) DESC")
+      .group(:id)
+      .limit(quantity)
+  end
 end
