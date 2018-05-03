@@ -33,7 +33,7 @@ class Merchant < ApplicationRecord
   def favorite_customer
     customers
       .joins(:transactions)
-      .where(transactions: {result: "Success"})
+      .merge(Transaction.successful)
       .group(:id)
       .order("count(transactions.id) DESC")
       .limit(1)
@@ -47,12 +47,18 @@ class Merchant < ApplicationRecord
       .where("Date(invoices.created_at) = ?", date)
       .where(transactions: {result: "Success"})[0]
   end
-
+  
   def self.most_items(quantity = 5)
-      joins(invoices: [:invoice_items, :transactions])
+    joins(invoices: [:invoice_items, :transactions])
       .merge(Transaction.successful)
       .order("sum(invoice_items.quantity) DESC")
       .group(:id)
       .limit(quantity)
+  end
+
+  def self.revenue_by_date(date)
+    joins(invoices: [:invoice_items])
+      .merge(Invoice.successful).where("Date(invoices.created_at) = ?", date)
+      .sum("invoice_items.quantity * invoice_items.unit_price")
   end
 end

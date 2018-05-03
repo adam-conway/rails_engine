@@ -84,4 +84,40 @@ RSpec.describe Merchant, type: :model do
       expect(merchant.single_merchant_revenue_by_date(search_param).revenue.to_f).to eq(10000)
     end
   end
+
+  describe 'class queries' do
+    it 'revenue_by_date' do
+      merchant_1 = create(:merchant)
+      merchant_2 = create(:merchant)
+
+      merchant_1_invoice_1 = create(:invoice, merchant: merchant_1, created_at: "2017-06-30 10:45:00 UTC")
+      merchant_1_invoice_2 = create(:invoice, merchant: merchant_1, created_at: "2017-06-30 10:45:00 UTC")
+      merchant_1_invoice_3 = create(:invoice, merchant: merchant_1, created_at: "2017-06-30 10:45:00 UTC")
+      merchant_1_invoice_4 = create(:invoice, merchant: merchant_1, created_at: "2017-06-29 10:45:00 UTC")
+      merchant_2_invoice_1 = create(:invoice, merchant: merchant_1, created_at: "2017-06-30 10:45:00 UTC")
+      merchant_2_invoice_2 = create(:invoice, merchant: merchant_1, created_at: "2017-06-30 10:45:00 UTC")
+      merchant_2_invoice_3 = create(:invoice, merchant: merchant_1, created_at: "2017-06-30 10:45:00 UTC")
+      merchant_2_invoice_4 = create(:invoice, merchant: merchant_1, created_at: "2017-06-29 10:45:00 UTC")
+
+      create(:transaction, invoice: merchant_1_invoice_1, result: "Success")
+      create(:transaction, invoice: merchant_1_invoice_2, result: "Success")
+      create(:transaction, invoice: merchant_1_invoice_3, result: "Failed")
+      create(:transaction, invoice: merchant_1_invoice_4, result: "Success")
+      create(:invoice_item, invoice: merchant_1_invoice_1, unit_price: 10, quantity: 10)
+      create(:invoice_item, invoice: merchant_1_invoice_2, unit_price: 10, quantity: 10)
+      create(:invoice_item, invoice: merchant_1_invoice_3, unit_price: 1234, quantity: 1345)
+      create(:invoice_item, invoice: merchant_1_invoice_4, unit_price: 10, quantity: 10)
+
+      create(:transaction, invoice: merchant_2_invoice_1, result: "Success")
+      create(:transaction, invoice: merchant_2_invoice_2, result: "Success")
+      create(:transaction, invoice: merchant_2_invoice_3, result: "Failed")
+      create(:transaction, invoice: merchant_2_invoice_4, result: "Success")
+      create(:invoice_item, invoice: merchant_2_invoice_1, unit_price: 10, quantity: 10)
+      create(:invoice_item, invoice: merchant_2_invoice_2, unit_price: 10, quantity: 10)
+      create(:invoice_item, invoice: merchant_2_invoice_3, unit_price: 1234, quantity: 1345)
+      create(:invoice_item, invoice: merchant_2_invoice_4, unit_price: 10, quantity: 10)
+
+      expect(Merchant.revenue_by_date("2017-06-30")).to eq(400)
+    end
+  end
 end
