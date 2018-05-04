@@ -30,12 +30,12 @@ $ rails s
 
 ### Contribute
 
-For the [repository](https://github.com/adam-conway/rails_engine) if you would like to contribute to this project. Pull requests will be considered in kind, but please note that contributions must adhere to a test-driven, rebase workflow.
+Fork the [repository](https://github.com/adam-conway/rails_engine) if you would like to contribute to this project. Pull requests will be considered in kind, but please note that contributions must adhere to a test-driven, rebase workflow.
 
 This project uses the RSpec test framework. Run tests using the standard `$ rspec` command.
 
 #### Database Schema
-![schema](https://github.com/adam-conway/rails_engine/tree/master/public/rails-engine-schema.png)
+![Database Schema](https://github.com/adam-conway/rails_engine/tree/master/public/rails-engine-schema.png "Database Schema")
 
 #### Current Contributors
 [Adam Conway](http://www.github.com/adam-conway)
@@ -56,7 +56,7 @@ RSpec-Rails 3.7.2
 
 Request URL
 ```
-api/v1/merchants
+http://localhost:3000/api/v1/merchants
 ```
 
 Response Body
@@ -107,7 +107,7 @@ Response Code
 
 Request URL
 ```
-api/v1/merchants/:id/invoices
+http://localhost:3000/api/v1/merchants/:id/invoices
 ```
 
 Response Body
@@ -144,7 +144,7 @@ Response Code
 
 Request URL
 ```
-api/v1/merchants/:id/items
+http://localhost:3000/api/v1/merchants/:id/items
 ```
 
 Response Body
@@ -187,7 +187,7 @@ Response Code
 
 Request URL
 ```
-api/v1/merchants/most_revenue?quantity=x
+http://localhost:3000/api/v1/merchants/most_revenue?quantity=x
 ```
 *Where X is the number of merchants you would like to be returned*
 
@@ -288,7 +288,7 @@ Response Code
 
 Request URL
 ```
-api/v1/merchants/:id/revenue?date=x
+http://localhost:3000/api/v1/merchants/:id/revenue?date=x
 ```
 *Where X is the date passed in 'YYYY-MM-DD' format*
 
@@ -308,7 +308,7 @@ Response Code
 
 Request URL
 ```
-api/v1/merchants/:id/customers_with_pending_invoices
+http://localhost:3000/api/v1/merchants/:id/customers_with_pending_invoices
 ```
 
 Response Body
@@ -337,7 +337,7 @@ Response Code
 
 Request URL
 ```
-api/v1/merchants/:id/favorite_customer
+http://localhost:3000/api/v1/merchants/:id/favorite_customer
 ```
 
 Response Body
@@ -359,7 +359,7 @@ Response Code
 
 Request URL
 ```
-api/v1/items
+http://localhost:3000/api/v1/items
 ```
 
 Response Body
@@ -392,7 +392,7 @@ Response Code
 
 Request URL
 ```
-api/v1/items/:id
+http://localhost:3000/api/v1/items/:id
 ```
 
 Response Body
@@ -416,7 +416,7 @@ Response Code
 
 Request URL
 ```
-api/v1/items/:id/invoice_items
+http://localhost:3000/api/v1/items/:id/invoice_items
 ```
 
 Response Body
@@ -449,7 +449,7 @@ Response Code
 
 Request URL
 ```
-api/v1/items/:id/merchant
+http://localhost:3000/api/v1/items/:id/merchant
 ```
 
 Response Body
@@ -471,7 +471,7 @@ Response Code
 
 Request URL
 ```
-api/v1/items/:id/best_day
+http://localhost:3000/api/v1/items/:id/best_day
 ```
 
 Response Body
@@ -491,7 +491,7 @@ Response Code
 
 Request URL
 ```
-api/v1/items/most_revenue?quantity=x
+http://localhost:3000/api/v1/items/most_revenue?quantity=x
 ```
 *Where X is the total number of items you would like to be returned*
 
@@ -525,7 +525,7 @@ Response Code
 
 Request URL
 ```
-api/v1/items/most_items?quantity=x
+http://localhost:3000/api/v1/items/most_items?quantity=x
 ```
 *Where X is the total number of items you would like to be returned*
 
@@ -560,7 +560,7 @@ Response Code
 
 Request URL
 ```
-api/v1/invoices
+http://localhost:3000/api/v1/invoices
 ```
 
 Response Body
@@ -590,7 +590,7 @@ Response Code
 **Invoice Show**
 Request URL
 ```
-api/v1/invoices/:id
+http://localhost:3000/api/v1/invoices/:id
 ```
 
 Response Body
