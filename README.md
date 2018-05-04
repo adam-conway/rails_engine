@@ -44,16 +44,16 @@ Status Code: 200
 ```
 [
   {
-  id: 1,
-  name: "Schroeder-Jerde"
+    id: 1,
+    name: "Schroeder-Jerde"
   },
   {
-  id: 2,
-  name: "Klein, Rempel and Jones"
+    id: 2,
+    name: "Klein, Rempel and Jones"
   },
   {
-  id: 3,
-  name: "Willms and Sons"
+    id: 3,
+    name: "Willms and Sons"
   },
   {...}
 ]
@@ -65,8 +65,8 @@ Status Code: 200
 ```
 ```
 {
-id: 1,
-name: "Schroeder-Jerde"
+  id: 1,
+  name: "Schroeder-Jerde"
 }
 ```
 
@@ -78,22 +78,22 @@ Status Code: 200
 ```
 [
   {
-  id: 29,
-  customer_id: 7,
-  merchant_id: 1,
-  status: "shipped"
+    id: 29,
+    customer_id: 7,
+    merchant_id: 1,
+    status: "shipped"
   },
   {
-  id: 137,
-  customer_id: 25,
-  merchant_id: 1,
-  status: "shipped"
+    id: 137,
+    customer_id: 25,
+    merchant_id: 1,
+    status: "shipped"
   },
   {
-  id: 155,
-  customer_id: 29,
-  merchant_id: 1,
-  status: "shipped"
+    id: 155,
+    customer_id: 29,
+    merchant_id: 1,
+    status: "shipped"
   },
   {...},
 ]
@@ -101,27 +101,30 @@ Status Code: 200
 
 **Items** http://localhost:3000/api/v1/merchants/:id/items
 ```
+Status Code: 200
+```
+```
 [
   {
-  id: 15,
-  name: "Item Rerum Est",
-  description: "Nemo voluptatem facere aut quo. Consequatur vel voluptas et. Consequuntur quibusdam ea consectetur accusamus sit optio qui.",
-  merchant_id: 1,
-  unit_price: "426.29"
+    id: 15,
+    name: "Item Rerum Est",
+    description: "Nemo voluptatem facere aut quo. Consequatur vel voluptas et. Consequuntur quibusdam ea consectetur accusamus sit optio qui.",
+    merchant_id: 1,
+    unit_price: "426.29"
   },
   {
-  id: 14,
-  name: "Item Itaque Consequatur",
-  description: "Voluptatibus omnis quo recusandae distinctio voluptatem quibusdam et. Voluptas odio accusamus delectus sunt quia. Non atque rerum vitae officia odit. Magnam iste occaecati in nihil autem saepe.",
-  merchant_id: 1,
-  unit_price: "398.91"
+    id: 14,
+    name: "Item Itaque Consequatur",
+    description: "Voluptatibus omnis quo recusandae distinctio voluptatem quibusdam et. Voluptas odio accusamus delectus sunt quia. Non atque rerum vitae officia odit. Magnam iste occaecati in nihil autem saepe.",
+    merchant_id: 1,
+    unit_price: "398.91"
   },
   {
-  id: 13,
-  name: "Item Voluptatem Sint",
-  description: "Nostrum doloribus quia. Expedita vitae beatae cumque. Aut ut illo aut eum.",
-  merchant_id: 1,
-  unit_price: "594.54"
+    id: 13,
+    name: "Item Voluptatem Sint",
+    description: "Nostrum doloribus quia. Expedita vitae beatae cumque. Aut ut illo aut eum.",
+    merchant_id: 1,
+    unit_price: "594.54"
   },
   {...},
 ]
@@ -131,43 +134,66 @@ Status Code: 200
 
 ###### All Merchants
 **Top Merchants Ranked by Total Revenue**
-*Where X is the number of merchants you would like to be returned*
 http://localhost:3000/api/v1/merchants/most_revenue?quantity=x
+*Where X is the number of merchants you would like to be returned*
 
 ```
 Status Code: 200
+```
+```
 [
   {
-  id: 14,
-  name: "Dicki-Bednar"
+    id: 14,
+    name: "Dicki-Bednar"
   },
   {
-  id: 89,
-  name: "Kassulke, O'Hara and Quitzon"
+    id: 89,
+    name: "Kassulke, O'Hara and Quitzon"
   },
   {
-  id: 98,
-  name: "Okuneva, Prohaska and Rolfson"
+    id: 98,
+    name: "Okuneva, Prohaska and Rolfson"
   },
   {...}
 ]
 ```
+**Total Revenue for Date**
+http://localhost:3000/api/v1/merchants/revenue?date=x
+*Where X is the date passed in  'YYYY-MM-DD' format*
+
+```
+Status Code: 200
+
+```
+```
+{
+  total_revenue: "2495397.37"
+}
+```
 
 **Top Merchants Ranked by Total Number of Items Sold**
-*Where X is the date passed in  "YYYY-MM-DD" format*
-http://localhost:3000/api/v1/merchants/revenue?date=x
-
-```
-Status Code: 200
-
-```
-
-**Total Revenue for Date**
-*Where X is the date passed in  "YYYY-MM-DD" format*
 http://localhost:3000/api/v1/merchants/most_items?quantity=x
+*Where X is the total number of merchants you would like to be returned*
 
 ```
 Status Code: 200
+```
+```
+[
+  {
+    id: 89,
+    name: "Kassulke, O'Hara and Quitzon"
+  },
+  {
+    id: 12,
+    name: "Kozey Group"
+  },
+  {
+    id: 22,
+    name: "Thiel Inc"
+  },
+  {...},
+]
 ```
 
 ###### Single Merchant
@@ -178,6 +204,11 @@ http://localhost:3000/api/v1/merchants/:id/revenue
 ```
 Status Code: 200
 ```
+```
+{
+  revenue: "528774.64"
+}
+```
 
 
 **Total Revenue for a Merchant for a Specific Invoice Date**
@@ -186,17 +217,44 @@ http://localhost:3000/api/v1/merchants/:id/revenue?date=x
 ```
 Status Code: 200
 ```
+```
+{
+  revenue: "2708.26"
+}
+```
 
 **Customers with Unpaid Invoices for a Given Merchant**
 http://localhost:3000/api/v1/merchants/:id/customers_with_pending_invoices
 ```
 Status Code: 200
 ```
+```
+[
+  {
+    first_name: "Rahsaan",
+    id: 862,
+    last_name: "Fahey"
+  },
+  {
+    first_name: "Marielle",
+    id: 826,
+    last_name: "Nikolaus"
+  },
+  {...},
+]
+```
 
 **Customer with Highest Number of Successful Transactions for a Given Merchant**
 http://localhost:3000/api/v1/merchants/:id/favorite_customer
 ```
 Status Code: 200
+```
+```
+{
+  first_name: "Carmella",
+  id: 787,
+  last_name: "Zulauf"
+}
 ```
 
 #### Item
