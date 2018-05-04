@@ -148,4 +148,15 @@ describe 'InvoiceItems API' do
     expect(response).to be_success
     expect(invoice_items.count).to eq(1)
   end
+
+  it 'can return a random invoice_item' do
+    invoice_items = create_list(:invoice_item, 5)
+
+    get '/api/v1/invoice_items/random'
+
+    invoice_item = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(invoice_items.map(&:id).include?(invoice_item["id"]))
+  end
 end
