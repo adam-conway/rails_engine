@@ -20,7 +20,8 @@ class Merchant < ApplicationRecord
     Customer.find_by_sql ["SELECT customers.* FROM merchants
                           JOIN invoices ON merchants.id = invoices.merchant_id
                           JOIN customers ON customers.id = invoices.customer_id
-                          JOIN transactions ON invoices.id = transactions.invoice_id WHERE merchants.id = #{id}
+                          JOIN transactions ON invoices.id = transactions.invoice_id
+                          WHERE merchants.id = #{id}
                           EXCEPT
                           SELECT customers.* FROM merchants
                           JOIN invoices ON merchants.id = invoices.merchant_id
