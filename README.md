@@ -29,14 +29,14 @@ $ rails s
 ```
 
 ### Endpoints
-*:id should be substituted with an integer corresponding to the desired merchant*
+*NOTE: References to `:id` in URLs should be substituted with an integer corresponding to the desired record*
 
 #### Merchant Endpoints
 **Merchant Index**
 
 Request URL
 ```
-http://localhost:3000/api/v1/merchants
+api/v1/merchants
 ```
 
 Response Body
@@ -62,12 +62,11 @@ Response Code
 200
 ```
 
-
 **Merchant Show**
 
 Request URL
 ```
-http://localhost:3000/api/v1/merchants/:id
+api/v1/merchants/:id
 ```
 
 Response Body
@@ -83,13 +82,12 @@ Response Code
 200
 ```
 
-
-##### Merchant Relationships
+##### Merchant Relationship Endpoints
 **Invoices Associated with a Merchant**
 
 Request URL
 ```
-http://localhost:3000/api/v1/merchants/:id/invoices
+api/v1/merchants/:id/invoices
 ```
 
 Response Body
@@ -126,7 +124,7 @@ Response Code
 
 Request URL
 ```
-http://localhost:3000/api/v1/merchants/:id/items
+api/v1/merchants/:id/items
 ```
 
 Response Body
@@ -162,14 +160,14 @@ Response Code
 200
 ```
 
-##### Merchant Queries
+##### Merchant Business Intelligence Endpoints
 
 ##### *All Merchants*
 **Top Merchants Ranked by Total Revenue**
 
 Request URL
 ```
-http://localhost:3000/api/v1/merchants/most_revenue?quantity=x
+api/v1/merchants/most_revenue?quantity=x
 ```
 *Where X is the number of merchants you would like to be returned*
 
@@ -195,7 +193,7 @@ Response Body
 
 Request URL
 ```
-http://localhost:3000/api/v1/merchants/revenue?date=x
+api/v1/merchants/revenue?date=x
 ```
 *Where X is the date passed in 'YYYY-MM-DD' format*
 
@@ -215,7 +213,7 @@ Response Code
 
 Request URL
 ```
-http://localhost:3000/api/v1/merchants/most_items?quantity=x
+api/v1/merchants/most_items?quantity=x
 ```
 *Where X is the total number of merchants you would like to be returned*
 
@@ -250,7 +248,7 @@ Response Code
 
 Request URL
 ```
-http://localhost:3000/api/v1/merchants/:id/revenue
+api/v1/merchants/:id/revenue
 ```
 
 Response Body
@@ -270,7 +268,7 @@ Response Code
 
 Request URL
 ```
-http://localhost:3000/api/v1/merchants/:id/revenue?date=x
+api/v1/merchants/:id/revenue?date=x
 ```
 *Where X is the date passed in 'YYYY-MM-DD' format*
 
@@ -290,7 +288,7 @@ Response Code
 
 Request URL
 ```
-http://localhost:3000/api/v1/merchants/:id/customers_with_pending_invoices
+api/v1/merchants/:id/customers_with_pending_invoices
 ```
 
 Response Body
@@ -319,7 +317,7 @@ Response Code
 
 Request URL
 ```
-http://localhost:3000/api/v1/merchants/:id/favorite_customer
+api/v1/merchants/:id/favorite_customer
 ```
 
 Response Body
@@ -341,7 +339,7 @@ Response Code
 
 Request URL
 ```
-http://localhost:3000/api/v1/items
+api/v1/items
 ```
 
 Response Body
@@ -374,7 +372,7 @@ Response Code
 
 Request URL
 ```
-http://localhost:3000/api/v1/items/:id
+api/v1/items/:id
 ```
 
 Response Body
@@ -393,12 +391,12 @@ Response Code
 200
 ```
 
-##### Item Relationships
+##### Item Relationship Endpoints
 **Invoice Items Associated with an Item**
 
 Request URL
 ```
-http://localhost:3000/api/v1/items/:id/invoice_items
+api/v1/items/:id/invoice_items
 ```
 
 Response Body
@@ -431,7 +429,7 @@ Response Code
 
 Request URL
 ```
-http://localhost:3000//api/v1/items/:id/merchant
+api/v1/items/:id/merchant
 ```
 
 Response Body
@@ -442,28 +440,351 @@ Response Body
 }
 ```
 
+Response Code
+```
+200
+```
+
+##### Item Business Intelligence Endpoints
+##### *Single Item*
+**Date with the Most Sales for an Associated Item**
+
+Request URL
+```
+api/v1/items/:id/best_day
+```
+
+Response Body
+```
+{
+  best_day: "2012-03-27T08:57:26.000Z"
+}
+```
 
 Response Code
 ```
 200
 ```
 
-##### Item Queries
-##### *Single Item*
-*:id should be substituted with an integer corresponding to the desired item*
-
 ##### *All Items*
+**Top Items Ranked by Total Revenue**
 
+Request URL
+```
+api/v1/items/most_revenue?quantity=x
+```
+*Where X is the total number of items you would like to be returned*
+
+Response Body
+```
+[
+  {
+    id: 227,
+    name: "Item Dicta Autem",
+    description: "Fugiat est ut eum impedit vel et. Deleniti quia debitis similique. Sint atque explicabo similique est. Iste fugit quis voluptas. Rerum ut harum sed fugiat eveniet ullam ut.",
+    merchant_id: 14,
+    unit_price: "853.19"
+  },
+  {
+    id: 2174,
+    name: "Item Nam Magnam",
+    description: "Eligendi quibusdam eveniet temporibus sed ratione ut magnam. Sit alias et. Laborum dignissimos quos impedit excepturi molestiae.",
+    merchant_id: 89,
+    unit_price: "788.08"
+  },
+  {...},
+]  
+```
+
+Response Code
+```
+200
+```
+
+**Top Items Ranked by Total Number Sold**
+
+Request URL
+```
+api/v1/items/most_items?quantity=x
+```
+*Where X is the total number of items you would like to be returned*
+
+Response Body
+```
+[
+  {
+    id: 227,
+    name: "Item Dicta Autem",
+    description: "Fugiat est ut eum impedit vel et. Deleniti quia debitis similique. Sint atque explicabo similique est. Iste fugit quis voluptas. Rerum ut harum sed fugiat eveniet ullam ut.",
+    merchant_id: 14,
+    unit_price: "853.19"
+  },
+  {
+    id: 2174,
+    name: "Item Nam Magnam",
+    description: "Eligendi quibusdam eveniet temporibus sed ratione ut magnam. Sit alias et. Laborum dignissimos quos impedit excepturi molestiae.",
+    merchant_id: 89,
+    unit_price: "788.08"
+  },
+  {...},
+]  
+```
+
+Response Code
+```
+200
+```
 
 #### Invoice Endpoints
 **Invoice Index**
-**Invoice Show**
-##### Invoice Relationships
-##### Invoice Queries
 
-#### Invoice Item
+Request URL
+```
+api/v1/invoices
+```
+
+Response Body
+```
+[
+  {
+    id: 1,
+    customer_id: 1,
+    merchant_id: 26,
+    status: "shipped"
+  },
+  {
+    id: 2,
+    customer_id: 1,
+    merchant_id: 75,
+    status: "shipped"
+  },
+  {},
+]    
+```
+
+Response Code
+```
+200
+```
+
+**Invoice Show**
+Request URL
+```
+api/v1/invoices/:id
+```
+
+Response Body
+```
+{
+  id: 1,
+  customer_id: 1,
+  merchant_id: 26,
+  status: "shipped"
+}
+```
+
+Response Code
+```
+200
+```
+
+##### Invoice Relationship Endpoints
+
+**Transactions**
+
+Request URL
+```
+http://localhost:3000/api/v1/invoices/:id/transactions
+```
+
+Response Body
+```
+[
+  {
+    credit_card_number: "4244851993865068",
+    id: 1422,
+    invoice_id: 1230,
+    result: "success"
+  },
+  {
+    credit_card_number: "4357653120585642",
+    id: 1421,
+    invoice_id: 1230,
+    result: "failed"
+  },
+  {...}
+]
+```
+
+Response Code
+```
+200
+```
+
+**Items**
+
+Request URL
+```
+http://localhost:3000/api/v1/invoices/:id/items
+```
+
+Response Body
+```
+[
+  {
+    id: 1552,
+    name: "Item Ea Consequatur",
+    description: "Vero numquam non provident qui error ducimus. Tenetur minima necessitatibus non est. Alias iusto sint perferendis eum.",
+    merchant_id: 65,
+    unit_price: "759.37"
+  },
+  {
+    id: 1524,
+    name: "Item Ea Atque",
+    description: "Aspernatur voluptatem natus et ex. Eos molestias quis maxime. Soluta est vel voluptate quisquam eos hic.",
+    merchant_id: 65,
+    unit_price: "416.19"
+  },
+  {...}
+]
+```
+
+Response Code
+```
+200
+```
+
+**Invoice Items**
+
+Request URL
+```
+http://localhost:3000/api/v1/invoices/:id/invoice_items
+```
+
+Response Body
+```
+[
+  {
+    id: 5464,
+    quantity: 9,
+    unit_price: "759.37",
+    invoice_id: 1230,
+    item_id: 1552
+  },
+  {
+    id: 5463,
+    quantity: 3,
+    unit_price: "416.19",
+    invoice_id: 1230,
+    item_id: 1524
+  },
+  {...}
+]
+```
+
+Response Code
+```
+200
+```
+
+**Customer**
+
+Request URL
+```
+http://localhost:3000/api/v1/invoices/:id/customer
+```
+
+Response Body
+```
+{
+  first_name: "Emmanuelle",
+  id: 238,
+  last_name: "Buckridge"
+}
+```
+
+Response Code
+```
+200
+```
+
+**Merchant**
+
+Request URL
+```
+http://localhost:3000/api/v1/invoices/:id/merchant
+```
+
+Response Body
+```
+{
+  id: 65,
+  name: "Hermann, Weimann and Botsford"
+}
+```
+
+Response Code
+```
+200
+```
+
+#### Invoice Item Endpoints
 **Invoice Item Index**
+
+Request URL
+```
+http://localhost:3000/api/v1/invoice_items
+```
+
+Response Body
+```
+[
+  {
+    id: 1,
+    quantity: 5,
+    unit_price: "136.35",
+    invoice_id: 1,
+    item_id: 539
+  },
+  {
+    id: 2,
+    quantity: 9,
+    unit_price: "233.24",
+    invoice_id: 1,
+    item_id: 528
+  },
+  {...},
+]  
+```
+
+Response Code
+```
+200
+```
+
 **Invoice Item Show**
+
+Request URL
+```
+http://localhost:3000/api/v1/invoice_items/:id
+```
+
+Response Body
+```
+{
+  id: 1,
+  quantity: 5,
+  unit_price: "136.35",
+  invoice_id: 1,
+  item_id: 539
+}
+```
+
+Response Code
+```
+200
+```
+
 ##### Invoice Item Relationships
 **Invoice Associated with Invoice Item**
 
@@ -487,12 +808,11 @@ Response Code
 200
 ```
 
-
 **Item Associated with Invoice Item**
 
 Request URL
 ```
-http://localhost:3000/api/v1/invoice_items/:id/item
+api/v1/invoice_items/:id/item
 ```
 
 Response Body
@@ -511,54 +831,239 @@ Response Code
 200
 ```
 
-##### Invoice Item Queries
+#### Transaction Endpoints
+**Transaction Index**
 
-#### Transaction
-**Index**
-**Show**
-##### Transaction Relationships
-##### Transaction Queries
+Request URL
+```
+http://localhost:3000/api/v1/transactions
+```
 
-#### Customer
-**Index**
-**Show**
-##### Customer Relationships
-##### Customer Queries
+Response Body
+```
+[
+  {
+    credit_card_number: "4654405418249632",
+    id: 1,
+    invoice_id: 1,
+    result: "success"
+  },
+  {
+    credit_card_number: "4580251236515201",
+    id: 2,
+    invoice_id: 2,
+    result: "success"
+  },
+  {...},
+]  
+```
+
+Response Code
+```
+200
+```
+**Transaction Show**
+
+Request URL
+```
+http://localhost:3000/api/v1/transactions/:id
+```
+
+Response Body
+```
+{
+  credit_card_number: "4654405418249632",
+  id: 1,
+  invoice_id: 1,
+  result: "success"
+}  
+```
+
+Response Code
+```
+200
+```
+
+##### Transaction Relationship Endpoints
+
+**Invoice**
+
+Request URL
+```
+http://localhost:3000/api/v1/transactions/:id/invoice
+```
+
+Response Body
+```
+{
+  id: 1,
+  customer_id: 1,
+  merchant_id: 26,
+  status: "shipped"
+}
+```
+
+Response Code
+```
+200
+```
+
+#### Customer Endpoints
+**Customer Index**
+
+Request URL
+```
+http://localhost:3000/api/v1/customers
+```
+
+Response Body
+```
+[
+  {
+    first_name: "Joey",
+    id: 1,
+    last_name: "Ondricka"
+  },
+  {
+    first_name: "Cecelia",
+    id: 2,
+    last_name: "Osinski"
+  },
+  {...},
+]  
+```
+
+Response Code
+```
+200
+```
+
+**Customer Show**
+
+Request URL
+```
+http://localhost:3000/api/v1/customers/:id
+```
+
+Response Body
+```
+{
+  first_name: "Joey",
+  id: 1,
+  last_name: "Ondricka"
+}
+```
+
+Response Code
+```
+200
+```
+
+##### Customer Relationship Endpoints
+**Invoices**
+
+Request URL
+```
+http://localhost:3000/api/v1/customers/:id/invoices
+```
+
+Response Body
+```
+[
+  {
+    id: 8,
+    customer_id: 1,
+    merchant_id: 38,
+    status: "shipped"
+  },
+  {
+    id: 7,
+    customer_id: 1,
+    merchant_id: 44,
+    status: "shipped"
+  },
+  {...},
+]  
+```
+
+Response Code
+```
+200
+```
+
+**Transactions**
+
+Request URL
+```
+http://localhost:3000/api/v1/customers/:id/transactions
+```
+
+Response Body
+```
+[
+  {
+    credit_card_number: "4801647818676136",
+    id: 7,
+    invoice_id: 8,
+    result: "success"
+  },
+  {
+    credit_card_number: "4203696133194408",
+    id: 6,
+    invoice_id: 7,
+    result: "success"
+  },
+  {...},
+]  
+```
+
+Response Code
+```
+200
+```
+
+##### Customer Business Intelligence Endpoints
+
+##### *Single Customer*
+
+
+**Merchant with Whom Customer Has Completed Most Transactions**
+
+Request URL
+```
+http://localhost:3000/api/v1/customers/:id/favorite_merchant
+```
+
+Response Body
+```
+{
+  id: 26,
+  name: "Balistreri, Schaefer and Kshlerin"
+}
+```
+
+Response Code
+```
+200
+```
+
 
 ### Contribute
 
-If you would like to contribute to this project, you can fork the repository [here](https://github.com/adam-conway/rails_engine). Pull requests will be considered in kind, but please note that contributions must adhere to a rebase workflow.
+For the [repository](https://github.com/adam-conway/rails_engine) if you would like to contribute to this project. Pull requests will be considered in kind, but please note that contributions must adhere to a test-driven, rebase workflow.
 
 This project uses the RSpec test framework. Run tests using the standard `$ rspec` command.
+
+#### Database Schema
+![schema](https://github.com/adam-conway/rails_engine/tree/master/public/rails-engine-schema.png)
 
 #### Current Contributors
 [Adam Conway](http://www.github.com/adam-conway)
 
 [Andrew Piermarini](http://www.github.com/agpiermarini)
 
-
-# Versions
+### Versions
 Ruby 2.4.1  
-Ruby on Rails 5.1.6
-ActiveRecord VERSION
-RSpec VERSION
-
-
-
-
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Rails 5.1.6
+ActiveRecord 5.1.6
+RSpec-Rails 3.7.2
