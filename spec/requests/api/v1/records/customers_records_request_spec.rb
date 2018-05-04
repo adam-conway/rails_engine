@@ -61,12 +61,12 @@ describe "Customers API" do
     it "can get one customer based on last name" do
       customer_list = create_list(:customer, 10)
 
-      get "/api/v1/customers/find?last_name=#{customer_list[3].last_name}"
+      get "/api/v1/customers/find?last_name=#{customer_list[0].last_name}"
 
       customer = JSON.parse(response.body)
 
       expect(response).to be_success
-      expect(customer["id"]).to eq(customer_list[3].id)
+      expect(customer["id"]).to eq(customer_list[0].id)
     end
 
     it "can get one customer based on first name (case-insensitive)" do
