@@ -1,6 +1,7 @@
 # Rails Engine
 This is a Rails-based API that allows a user or application to consume sales engine data for merchants, items, invoices, invoice items, transactions, and customers. Setup and other instructions, including information regarding each of the available endpoints, are detailed below.
 
+___
 ### Setup
 To use this application, first clone the repository from the following location:
 
@@ -28,6 +29,7 @@ Then spin up a server:
 $ rails s
 ```
 
+___
 ### Contribute
 
 Fork the [repository](https://github.com/adam-conway/rails_engine) if you would like to contribute to this project. Pull requests will be considered in kind, but please note that contributions must adhere to a test-driven, rebase workflow.
@@ -35,7 +37,7 @@ Fork the [repository](https://github.com/adam-conway/rails_engine) if you would 
 This project uses the RSpec test framework. Run tests using the standard `$ rspec` command.
 
 #### Database Schema
-![Database Schema](https://github.com/adam-conway/rails_engine/tree/master/public/rails-engine-schema.png "Database Schema")
+![Database Schema](https://github.com/adam-conway/rails_engine/tree/master/public/rails-engine-schema.png)
 
 #### Current Contributors
 [Adam Conway](http://www.github.com/adam-conway)
@@ -48,10 +50,11 @@ Rails 5.1.6
 ActiveRecord 5.1.6
 RSpec-Rails 3.7.2
 
-### Endpoints
-*NOTE: References to `:id` in URLs should be substituted with an integer corresponding to the desired record*
 
-#### Merchant Endpoints
+___
+
+### Merchant Endpoints
+*NOTE: References to `:id` in endpoint URLs should be substituted with an integer corresponding to the desired record*
 **Merchant Index**
 
 Request URL
@@ -82,6 +85,7 @@ Response Code
 200
 ```
 
+
 **Merchant Show**
 
 Request URL
@@ -101,6 +105,7 @@ Response Code
 ```
 200
 ```
+
 
 ##### Merchant Relationship Endpoints
 **Invoices Associated with a Merchant**
@@ -139,6 +144,7 @@ Response Code
 ```
 200
 ```
+
 
 **Items Associated with a Merchant**
 
@@ -180,6 +186,7 @@ Response Code
 200
 ```
 
+
 ##### Merchant Business Intelligence Endpoints
 
 ##### *All Merchants*
@@ -209,6 +216,8 @@ Response Body
   {...}
 ]
 ```
+
+
 **Total Revenue for Date**
 
 Request URL
@@ -228,6 +237,7 @@ Response Code
 ```
 200
 ```
+
 
 **Top Merchants Ranked by Total Number of Items Sold**
 
@@ -304,6 +314,7 @@ Response Code
 200
 ```
 
+
 **Customers with Unpaid Invoices for a Given Merchant**
 
 Request URL
@@ -333,6 +344,7 @@ Response Code
 200
 ```
 
+
 **Customer with Highest Number of Successful Transactions for a Given Merchant**
 
 Request URL
@@ -353,6 +365,7 @@ Response Code
 ```
 200
 ```
+
 
 #### Item Endpoints
 **Item Index**
@@ -388,6 +401,7 @@ Response Code
 200
 ```
 
+
 **Item Show**
 
 Request URL
@@ -410,6 +424,7 @@ Response Code
 ```
 200
 ```
+
 
 ##### Item Relationship Endpoints
 **Invoice Items Associated with an Item**
@@ -445,6 +460,7 @@ Response Code
 200
 ```
 
+
 **Merchant Associated with an Item**
 
 Request URL
@@ -464,6 +480,7 @@ Response Code
 ```
 200
 ```
+
 
 ##### Item Business Intelligence Endpoints
 ##### *Single Item*
@@ -485,6 +502,7 @@ Response Code
 ```
 200
 ```
+
 
 ##### *All Items*
 **Top Items Ranked by Total Revenue**
@@ -521,6 +539,7 @@ Response Code
 200
 ```
 
+
 **Top Items Ranked by Total Number Sold**
 
 Request URL
@@ -555,6 +574,7 @@ Response Code
 200
 ```
 
+
 #### Invoice Endpoints
 **Invoice Index**
 
@@ -587,6 +607,7 @@ Response Code
 200
 ```
 
+
 **Invoice Show**
 Request URL
 ```
@@ -607,6 +628,7 @@ Response Code
 ```
 200
 ```
+
 
 ##### Invoice Relationship Endpoints
 
@@ -641,6 +663,7 @@ Response Code
 200
 ```
 
+
 **Items**
 
 Request URL
@@ -674,6 +697,7 @@ Response Code
 200
 ```
 
+
 **Invoice Items**
 
 Request URL
@@ -706,6 +730,7 @@ Response Code
 ```
 200
 ```
+
 
 **Customer**
 
@@ -748,6 +773,7 @@ Response Code
 200
 ```
 
+
 #### Invoice Item Endpoints
 **Invoice Item Index**
 
@@ -782,6 +808,7 @@ Response Code
 200
 ```
 
+
 **Invoice Item Show**
 
 Request URL
@@ -804,6 +831,7 @@ Response Code
 ```
 200
 ```
+
 
 ##### Invoice Item Relationships
 **Invoice Associated with Invoice Item**
@@ -828,6 +856,7 @@ Response Code
 200
 ```
 
+
 **Item Associated with Invoice Item**
 
 Request URL
@@ -850,6 +879,7 @@ Response Code
 ```
 200
 ```
+
 
 #### Transaction Endpoints
 **Transaction Index**
@@ -904,6 +934,7 @@ Response Code
 200
 ```
 
+
 ##### Transaction Relationship Endpoints
 
 **Invoice**
@@ -927,6 +958,7 @@ Response Code
 ```
 200
 ```
+
 
 #### Customer Endpoints
 **Customer Index**
@@ -958,6 +990,7 @@ Response Code
 200
 ```
 
+
 **Customer Show**
 
 Request URL
@@ -978,6 +1011,7 @@ Response Code
 ```
 200
 ```
+
 
 ##### Customer Relationship Endpoints
 **Invoices**
@@ -1011,6 +1045,7 @@ Response Code
 200
 ```
 
+
 **Transactions**
 
 Request URL
@@ -1042,10 +1077,10 @@ Response Code
 200
 ```
 
+
 ##### Customer Business Intelligence Endpoints
 
 ##### *Single Customer*
-
 
 **Merchant with Whom Customer Has Completed Most Transactions**
 
