@@ -58,7 +58,7 @@ ___
 
 Request URL
 ```
-http://localhost:3000/api/v1/merchants
+https://rales-engine.herokuapp.com/api/v1/merchants
 ```
 
 Response Body
@@ -111,7 +111,7 @@ Response Code
 
 Request URL
 ```
-http://localhost:3000/api/v1/merchants/:id/invoices
+https://rales-engine.herokuapp.com/api/v1/merchants/:id/invoices
 ```
 
 Response Body
@@ -149,7 +149,7 @@ Response Code
 
 Request URL
 ```
-http://localhost:3000/api/v1/merchants/:id/items
+https://rales-engine.herokuapp.com/api/v1/merchants/:id/items
 ```
 
 Response Body
@@ -193,7 +193,7 @@ Response Code
 
 Request URL
 ```
-http://localhost:3000/api/v1/merchants/most_revenue?quantity=x
+https://rales-engine.herokuapp.com/api/v1/merchants/most_revenue?quantity=x
 ```
 *Where X is the number of merchants you would like to be returned*
 
@@ -297,7 +297,7 @@ Response Code
 
 Request URL
 ```
-http://localhost:3000/api/v1/merchants/:id/revenue?date=x
+https://rales-engine.herokuapp.com/api/v1/merchants/:id/revenue?date=x
 ```
 *Where X is the date passed in 'YYYY-MM-DD' format*
 
@@ -318,7 +318,7 @@ Response Code
 
 Request URL
 ```
-http://localhost:3000/api/v1/merchants/:id/customers_with_pending_invoices
+https://rales-engine.herokuapp.com/api/v1/merchants/:id/customers_with_pending_invoices
 ```
 
 Response Body
@@ -348,7 +348,7 @@ Response Code
 
 Request URL
 ```
-http://localhost:3000/api/v1/merchants/:id/favorite_customer
+https://rales-engine.herokuapp.com/api/v1/merchants/:id/favorite_customer
 ```
 
 Response Body
@@ -371,7 +371,7 @@ Response Code
 
 Request URL
 ```
-http://localhost:3000/api/v1/items
+https://rales-engine.herokuapp.com/api/v1/items
 ```
 
 Response Body
@@ -405,7 +405,7 @@ Response Code
 
 Request URL
 ```
-http://localhost:3000/api/v1/items/:id
+https://rales-engine.herokuapp.com/api/v1/items/:id
 ```
 
 Response Body
@@ -430,7 +430,7 @@ Response Code
 
 Request URL
 ```
-http://localhost:3000/api/v1/items/:id/invoice_items
+https://rales-engine.herokuapp.com/api/v1/items/:id/invoice_items
 ```
 
 Response Body
@@ -464,7 +464,7 @@ Response Code
 
 Request URL
 ```
-http://localhost:3000/api/v1/items/:id/merchant
+https://rales-engine.herokuapp.com/api/v1/items/:id/merchant
 ```
 
 Response Body
@@ -487,7 +487,7 @@ Response Code
 
 Request URL
 ```
-http://localhost:3000/api/v1/items/:id/best_day
+https://rales-engine.herokuapp.com/api/v1/items/:id/best_day
 ```
 
 Response Body
@@ -508,7 +508,7 @@ Response Code
 
 Request URL
 ```
-http://localhost:3000/api/v1/items/most_revenue?quantity=x
+https://rales-engine.herokuapp.com/api/v1/items/most_revenue?quantity=x
 ```
 *Where X is the total number of items you would like to be returned*
 
@@ -543,7 +543,7 @@ Response Code
 
 Request URL
 ```
-http://localhost:3000/api/v1/items/most_items?quantity=x
+https://rales-engine.herokuapp.com/api/v1/items/most_items?quantity=x
 ```
 *Where X is the total number of items you would like to be returned*
 
@@ -579,7 +579,7 @@ Response Code
 
 Request URL
 ```
-http://localhost:3000/api/v1/invoices
+https://rales-engine.herokuapp.com/api/v1/invoices
 ```
 
 Response Body
@@ -610,7 +610,7 @@ Response Code
 **Invoice Show**
 Request URL
 ```
-http://localhost:3000/api/v1/invoices/:id
+https://rales-engine.herokuapp.com/api/v1/invoices/:id
 ```
 
 Response Body
@@ -635,7 +635,7 @@ Response Code
 
 Request URL
 ```
-http://localhost:3000/api/v1/invoices/:id/transactions
+https://rales-engine.herokuapp.com/api/v1/invoices/:id/transactions
 ```
 
 Response Body
@@ -667,7 +667,7 @@ Response Code
 
 Request URL
 ```
-http://localhost:3000/api/v1/invoices/:id/items
+https://rales-engine.herokuapp.com/api/v1/invoices/:id/items
 ```
 
 Response Body
@@ -701,7 +701,7 @@ Response Code
 
 Request URL
 ```
-http://localhost:3000/api/v1/invoices/:id/invoice_items
+https://rales-engine.herokuapp.com/api/v1/invoices/:id/invoice_items
 ```
 
 Response Body
@@ -735,7 +735,7 @@ Response Code
 
 Request URL
 ```
-http://localhost:3000/api/v1/invoices/:id/customer
+https://rales-engine.herokuapp.com/api/v1/invoices/:id/customer
 ```
 
 Response Body
@@ -756,7 +756,7 @@ Response Code
 
 Request URL
 ```
-http://localhost:3000/api/v1/invoices/:id/merchant
+https://rales-engine.herokuapp.com/api/v1/invoices/:id/merchant
 ```
 
 Response Body
@@ -778,7 +778,7 @@ Response Code
 
 Request URL
 ```
-http://localhost:3000/api/v1/invoice_items
+https://rales-engine.herokuapp.com/api/v1/invoice_items
 ```
 
 Response Body
@@ -812,7 +812,7 @@ Response Code
 
 Request URL
 ```
-http://localhost:3000/api/v1/invoice_items/:id
+https://rales-engine.herokuapp.com/api/v1/invoice_items/:id
 ```
 
 Response Body
@@ -837,7 +837,7 @@ Response Code
 
 Request URL
 ```
-http://localhost:3000/api/v1/invoice_items/:id/invoice
+https://rales-engine.herokuapp.com/api/v1/invoice_items/:id/invoice
 ```
 
 Response Body
@@ -885,7 +885,7 @@ Response Code
 
 Request URL
 ```
-http://localhost:3000/api/v1/transactions
+https://rales-engine.herokuapp.com/api/v1/transactions
 ```
 
 Response Body
@@ -915,7 +915,7 @@ Response Code
 
 Request URL
 ```
-http://localhost:3000/api/v1/transactions/:id
+https://rales-engine.herokuapp.com/api/v1/transactions/:id
 ```
 
 Response Body
@@ -940,7 +940,7 @@ Response Code
 
 Request URL
 ```
-http://localhost:3000/api/v1/transactions/:id/invoice
+https://rales-engine.herokuapp.com/api/v1/transactions/:id/invoice
 ```
 
 Response Body
@@ -964,7 +964,7 @@ Response Code
 
 Request URL
 ```
-http://localhost:3000/api/v1/customers
+https://rales-engine.herokuapp.com/api/v1/customers
 ```
 
 Response Body
@@ -994,7 +994,7 @@ Response Code
 
 Request URL
 ```
-http://localhost:3000/api/v1/customers/:id
+https://rales-engine.herokuapp.com/api/v1/customers/:id
 ```
 
 Response Body
@@ -1017,7 +1017,7 @@ Response Code
 
 Request URL
 ```
-http://localhost:3000/api/v1/customers/:id/invoices
+https://rales-engine.herokuapp.com/api/v1/customers/:id/invoices
 ```
 
 Response Body
@@ -1049,7 +1049,7 @@ Response Code
 
 Request URL
 ```
-http://localhost:3000/api/v1/customers/:id/transactions
+https://rales-engine.herokuapp.com/api/v1/customers/:id/transactions
 ```
 
 Response Body
@@ -1085,7 +1085,7 @@ Response Code
 
 Request URL
 ```
-http://localhost:3000/api/v1/customers/:id/favorite_merchant
+https://rales-engine.herokuapp.com/api/v1/customers/:id/favorite_merchant
 ```
 
 Response Body
