@@ -1,11 +1,6 @@
 # Rails Engine
 This is a Rails-based API that allows a user or application to consume sales engine data for merchants, items, invoices, invoice items, transactions, and customers. Setup and other instructions, including information regarding each of the available endpoints, are detailed below.
 
-### Contributors
-[Adam Conway](http://www.github.com/adam-conway)
-
-[Andrew Piermarini](http://www.github.com/agpiermarini)
-
 ### Setup
 To use this application, first clone the repository from the following location:
 
@@ -36,11 +31,15 @@ $ rails s
 ### Endpoints
 *:id should be substituted with an integer corresponding to the desired merchant*
 
-#### Merchant
-**Index** http://localhost:3000/api/v1/merchants
+#### Merchant Endpoints
+**Merchant Index**
+
+Request URL
 ```
-Status Code: 200
+http://localhost:3000/api/v1/merchants
 ```
+
+Response Body
 ```
 [
   {
@@ -58,11 +57,20 @@ Status Code: 200
   {...}
 ]
 ```
+Response Code
+```
+200
+```
 
-**Show** http://localhost:3000/api/v1/merchants/:id
+
+**Merchant Show**
+
+Request URL
 ```
-Status Code: 200
+http://localhost:3000/api/v1/merchants/:id
 ```
+
+Response Body
 ```
 {
   id: 1,
@@ -70,12 +78,21 @@ Status Code: 200
 }
 ```
 
+Response Code
+```
+200
+```
+
+
 ##### Merchant Relationships
 **Invoices Associated with a Merchant**
+
+Request URL
+```
 http://localhost:3000/api/v1/merchants/:id/invoices
 ```
-Status Code: 200
-```
+
+Response Body
 ```
 [
   {
@@ -100,11 +117,19 @@ Status Code: 200
 ]
 ```
 
+Response Code
+```
+200
+```
+
 **Items Associated with a Merchant**
+
+Request URL
+```
 http://localhost:3000/api/v1/merchants/:id/items
 ```
-Status Code: 200
-```
+
+Response Body
 ```
 [
   {
@@ -132,16 +157,23 @@ Status Code: 200
 ]
 ```
 
+Response Code
+```
+200
+```
+
 ##### Merchant Queries
 
 ##### *All Merchants*
 **Top Merchants Ranked by Total Revenue**
+
+Request URL
+```
 http://localhost:3000/api/v1/merchants/most_revenue?quantity=x
+```
 *Where X is the number of merchants you would like to be returned*
 
-```
-Status Code: 200
-```
+Response Body
 ```
 [
   {
@@ -160,26 +192,34 @@ Status Code: 200
 ]
 ```
 **Total Revenue for Date**
+
+Request URL
+```
 http://localhost:3000/api/v1/merchants/revenue?date=x
+```
 *Where X is the date passed in 'YYYY-MM-DD' format*
 
-```
-Status Code: 200
-
-```
+Response Body
 ```
 {
   total_revenue: "2495397.37"
 }
 ```
 
+Response Code
+```
+200
+```
+
 **Top Merchants Ranked by Total Number of Items Sold**
+
+Request URL
+```
 http://localhost:3000/api/v1/merchants/most_items?quantity=x
+```
 *Where X is the total number of merchants you would like to be returned*
 
-```
-Status Code: 200
-```
+Response Body
 ```
 [
   {
@@ -198,38 +238,62 @@ Status Code: 200
 ]
 ```
 
+Response Code
+```
+200
+```
+
 ##### *Single Merchant*
 *:id should be substituted with an integer corresponding to the desired merchant*
 
 **Total Revenue for a Merchant Across Successful Transactions**
+
+Request URL
+```
 http://localhost:3000/api/v1/merchants/:id/revenue
 ```
-Status Code: 200
-```
+
+Response Body
 ```
 {
   revenue: "528774.64"
 }
 ```
 
+Response Code
+```
+200
+```
+
 
 **Total Revenue for a Merchant for a Specific Invoice Date**
-*Where X is the date passed in 'YYYY-MM-DD' format*
+
+Request URL
+```
 http://localhost:3000/api/v1/merchants/:id/revenue?date=x
 ```
-Status Code: 200
-```
+*Where X is the date passed in 'YYYY-MM-DD' format*
+
+Response Body
 ```
 {
   revenue: "2708.26"
 }
 ```
 
+Response Code
+```
+200
+```
+
 **Customers with Unpaid Invoices for a Given Merchant**
+
+Request URL
+```
 http://localhost:3000/api/v1/merchants/:id/customers_with_pending_invoices
 ```
-Status Code: 200
-```
+
+Response Body
 ```
 [
   {
@@ -246,11 +310,19 @@ Status Code: 200
 ]
 ```
 
+Response Code
+```
+200
+```
+
 **Customer with Highest Number of Successful Transactions for a Given Merchant**
+
+Request URL
+```
 http://localhost:3000/api/v1/merchants/:id/favorite_customer
 ```
-Status Code: 200
-```
+
+Response Body
 ```
 {
   first_name: "Carmella",
@@ -259,11 +331,20 @@ Status Code: 200
 }
 ```
 
-#### Item
-**Index** http://localhost:3000/api/v1/items
+Response Code
 ```
-Status Code: 200
+200
 ```
+
+#### Item Endpoints
+**Item Index**
+
+Request URL
+```
+http://localhost:3000/api/v1/items
+```
+
+Response Body
 ```
 [
   {
@@ -284,10 +365,19 @@ Status Code: 200
 ]
 ```
 
-**Show** http://localhost:3000/api/v1/items/:id
+Response Code
 ```
-Status Code: 200
+200
 ```
+
+**Item Show**
+
+Request URL
+```
+http://localhost:3000/api/v1/items/:id
+```
+
+Response Body
 ```
 {
   id: 1,
@@ -298,13 +388,20 @@ Status Code: 200
 }
 ```
 
+Response Code
+```
+200
+```
+
 ##### Item Relationships
 **Invoice Items Associated with an Item**
-http://localhost:3000/api/v1/items/:id/invoice_items
 
+Request URL
 ```
-Status Code: 200
+http://localhost:3000/api/v1/items/:id/invoice_items
 ```
+
+Response Body
 ```
 [
   {
@@ -324,16 +421,31 @@ Status Code: 200
   {...},
 ]
 ```
+
+Response Code
+```
+200
+```
+
 **Merchant Associated with an Item**
+
+Request URL
+```
 http://localhost:3000//api/v1/items/:id/merchant
 ```
-Status Code: 200
-```
+
+Response Body
 ```
 {
   id: 1,
   name: "Schroeder-Jerde"
 }
+```
+
+
+Response Code
+```
+200
 ```
 
 ##### Item Queries
@@ -343,20 +455,24 @@ Status Code: 200
 ##### *All Items*
 
 
-#### Invoice
-**Index**
-**Show**
+#### Invoice Endpoints
+**Invoice Index**
+**Invoice Show**
 ##### Invoice Relationships
 ##### Invoice Queries
 
 #### Invoice Item
-**Index**
-**Show**
+**Invoice Item Index**
+**Invoice Item Show**
 ##### Invoice Item Relationships
-**Invoice Associated with Invoice Item** http://localhost:3000/api/v1/invoice_items/:id/invoice
+**Invoice Associated with Invoice Item**
+
+Request URL
 ```
-Status Code: 200
+http://localhost:3000/api/v1/invoice_items/:id/invoice
 ```
+
+Response Body
 ```
 {
   id: 1,
@@ -366,11 +482,20 @@ Status Code: 200
 }
 ```
 
+Response Code
+```
+200
+```
+
+
 **Item Associated with Invoice Item**
+
+Request URL
+```
 http://localhost:3000/api/v1/invoice_items/:id/item
 ```
-Status Code: 200
-```
+
+Response Body
 ```
 {
   id: 539,
@@ -379,6 +504,11 @@ Status Code: 200
   merchant_id: 26,
   unit_price: "136.35"
 }
+```
+
+Response Code
+```
+200
 ```
 
 ##### Invoice Item Queries
@@ -395,11 +525,24 @@ Status Code: 200
 ##### Customer Relationships
 ##### Customer Queries
 
+### Contribute
+
+If you would like to contribute to this project, you can fork the repository [here](https://github.com/adam-conway/rails_engine). Pull requests will be considered in kind, but please note that contributions must adhere to a rebase workflow.
+
+This project uses the RSpec test framework. Run tests using the standard `$ rspec` command.
+
+#### Current Contributors
+[Adam Conway](http://www.github.com/adam-conway)
+
+[Andrew Piermarini](http://www.github.com/agpiermarini)
+
 
 # Versions
 Ruby 2.4.1  
 Ruby on Rails 5.1.6
 ActiveRecord VERSION
+RSpec VERSION
+
 
 
 
