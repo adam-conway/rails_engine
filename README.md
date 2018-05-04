@@ -1,11 +1,242 @@
-# README
+# Rails Engine
+This Rails-based API allows a user or application to consume sales engine data for merchants, items, invoices, invoice items, transactions, and customers. Setup and other instructions, including information regarding each of the available endpoints, are detailed below.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Contributors
+[Adam Conway](http://www.github.com/adam-conway)
 
-Things you may want to cover:
+[Andrew Piermarini](http://www.github.com/agpiermarini)
 
-* Ruby version
+### Setup
+To use this application, first clone the repository from the following location:
+
+```
+$ git clone https://github.com/adam-conway/rails_engine.git
+```
+
+From the application directory, run the following commands to install and update all gem dependencies:
+
+```
+$ bundle
+$ bundle update
+```
+
+Next, run the following commands to initialize the database and import CSV data:
+
+```
+$ rake db:{create, migrate}
+$ rake import:all
+```
+
+Then spin up a server:
+
+```
+$ rails s
+```
+
+### Endpoints
+*:id should be substituted with an integer corresponding to the desired merchant*
+
+#### Merchant
+**Index** http://localhost:3000/api/v1/merchants
+```
+Status Code: 200
+```
+```
+[
+  {
+  id: 1,
+  name: "Schroeder-Jerde"
+  },
+  {
+  id: 2,
+  name: "Klein, Rempel and Jones"
+  },
+  {
+  id: 3,
+  name: "Willms and Sons"
+  },
+  {...}
+]
+```
+
+**Show** http://localhost:3000/api/v1/merchants/:id
+```
+Status Code: 200
+```
+```
+{
+id: 1,
+name: "Schroeder-Jerde"
+}
+```
+
+##### Merchant Relationships
+**Invoices** http://localhost:3000/api/v1/merchants/:id/invoices
+```
+Status Code: 200
+```
+```
+[
+  {
+  id: 29,
+  customer_id: 7,
+  merchant_id: 1,
+  status: "shipped"
+  },
+  {
+  id: 137,
+  customer_id: 25,
+  merchant_id: 1,
+  status: "shipped"
+  },
+  {
+  id: 155,
+  customer_id: 29,
+  merchant_id: 1,
+  status: "shipped"
+  },
+  {...},
+]
+```
+
+**Items** http://localhost:3000/api/v1/merchants/:id/items
+```
+[
+  {
+  id: 15,
+  name: "Item Rerum Est",
+  description: "Nemo voluptatem facere aut quo. Consequatur vel voluptas et. Consequuntur quibusdam ea consectetur accusamus sit optio qui.",
+  merchant_id: 1,
+  unit_price: "426.29"
+  },
+  {
+  id: 14,
+  name: "Item Itaque Consequatur",
+  description: "Voluptatibus omnis quo recusandae distinctio voluptatem quibusdam et. Voluptas odio accusamus delectus sunt quia. Non atque rerum vitae officia odit. Magnam iste occaecati in nihil autem saepe.",
+  merchant_id: 1,
+  unit_price: "398.91"
+  },
+  {
+  id: 13,
+  name: "Item Voluptatem Sint",
+  description: "Nostrum doloribus quia. Expedita vitae beatae cumque. Aut ut illo aut eum.",
+  merchant_id: 1,
+  unit_price: "594.54"
+  },
+  {...},
+]
+```
+
+##### Merchant Queries
+
+###### All Merchants
+**Top Merchants Ranked by Total Revenue**
+*Where X is the number of merchants you would like to be returned*
+http://localhost:3000/api/v1/merchants/most_revenue?quantity=x
+
+```
+Status Code: 200
+[
+  {
+  id: 14,
+  name: "Dicki-Bednar"
+  },
+  {
+  id: 89,
+  name: "Kassulke, O'Hara and Quitzon"
+  },
+  {
+  id: 98,
+  name: "Okuneva, Prohaska and Rolfson"
+  },
+  {...}
+]
+```
+
+**Top Merchants Ranked by Total Number of Items Sold**
+*Where X is the date passed in  "YYYY-MM-DD" format*
+http://localhost:3000/api/v1/merchants/revenue?date=x
+
+```
+Status Code: 200
+
+```
+
+**Total Revenue for Date**
+*Where X is the date passed in  "YYYY-MM-DD" format*
+http://localhost:3000/api/v1/merchants/most_items?quantity=x
+
+```
+Status Code: 200
+```
+
+###### Single Merchant
+*:id should be substituted with an integer corresponding to the desired merchant*
+
+**Total Revenue for a Merchant Across Successful Transactions**
+http://localhost:3000/api/v1/merchants/:id/revenue
+```
+Status Code: 200
+```
+
+
+**Total Revenue for a Merchant for a Specific Invoice Date**
+*Where X is the date passed in  "YYYY-MM-DD" format*
+http://localhost:3000/api/v1/merchants/:id/revenue?date=x
+```
+Status Code: 200
+```
+
+**Customers with Unpaid Invoices for a Given Merchant**
+http://localhost:3000/api/v1/merchants/:id/customers_with_pending_invoices
+```
+Status Code: 200
+```
+
+**Customer with Highest Number of Successful Transactions for a Given Merchant**
+http://localhost:3000/api/v1/merchants/:id/favorite_customer
+```
+Status Code: 200
+```
+
+#### Item
+**Index**
+**Show**
+##### Item Relationships
+##### Item Queries
+
+#### Invoice
+**Index**
+**Show**
+##### Invoice Relationships
+##### Invoice Queries
+
+#### Invoice Item
+**Index**
+**Show**
+##### Invoice Item Relationships
+##### Invoice Item Queries
+
+#### Transaction
+**Index**
+**Show**
+##### Transaction Relationships
+##### Transaction Queries
+
+#### Customer
+**Index**
+**Show**
+##### Customer Relationships
+##### Customer Queries
+
+
+# Versions
+Ruby 2.4.1  
+Ruby on Rails 5.1.6
+ActiveRecord VERSION
+
+
+
 
 * System dependencies
 
