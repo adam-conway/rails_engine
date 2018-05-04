@@ -52,7 +52,6 @@ RSpec-Rails 3.7.2
 
 
 ___
-
 ### Merchant Endpoints
 *NOTE: References to `:id` in endpoint URLs should be substituted with an integer corresponding to the desired record*
 **Merchant Index**
