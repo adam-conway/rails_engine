@@ -23,7 +23,7 @@ $ bundle update
 Next, run the following commands to initialize the database and import CSV data:
 
 ```
-$ rake db:{create, migrate}
+$ rake db:{create,migrate}
 $ rake import:all
 ```
 
@@ -337,6 +337,11 @@ Status Code: 200
 ```
 
 ##### Item Queries
+##### *Single Item*
+*:id should be substituted with an integer corresponding to the desired item*
+
+##### *All Items*
+
 
 #### Invoice
 **Index**
