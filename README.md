@@ -28,6 +28,26 @@ Then spin up a server:
 $ rails s
 ```
 
+### Contribute
+
+For the [repository](https://github.com/adam-conway/rails_engine) if you would like to contribute to this project. Pull requests will be considered in kind, but please note that contributions must adhere to a test-driven, rebase workflow.
+
+This project uses the RSpec test framework. Run tests using the standard `$ rspec` command.
+
+#### Database Schema
+![schema](https://github.com/adam-conway/rails_engine/tree/master/public/rails-engine-schema.png)
+
+#### Current Contributors
+[Adam Conway](http://www.github.com/adam-conway)
+
+[Andrew Piermarini](http://www.github.com/agpiermarini)
+
+### Versions
+Ruby 2.4.1  
+Rails 5.1.6
+ActiveRecord 5.1.6
+RSpec-Rails 3.7.2
+
 ### Endpoints
 *NOTE: References to `:id` in URLs should be substituted with an integer corresponding to the desired record*
 
@@ -1046,24 +1066,3 @@ Response Code
 ```
 200
 ```
-
-
-### Contribute
-
-For the [repository](https://github.com/adam-conway/rails_engine) if you would like to contribute to this project. Pull requests will be considered in kind, but please note that contributions must adhere to a test-driven, rebase workflow.
-
-This project uses the RSpec test framework. Run tests using the standard `$ rspec` command.
-
-#### Database Schema
-![schema](https://github.com/adam-conway/rails_engine/tree/master/public/rails-engine-schema.png)
-
-#### Current Contributors
-[Adam Conway](http://www.github.com/adam-conway)
-
-[Andrew Piermarini](http://www.github.com/agpiermarini)
-
-### Versions
-Ruby 2.4.1  
-Rails 5.1.6
-ActiveRecord 5.1.6
-RSpec-Rails 3.7.2
