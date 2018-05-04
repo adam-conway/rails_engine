@@ -1,5 +1,5 @@
 # Rails Engine
-This Rails-based API allows a user or application to consume sales engine data for merchants, items, invoices, invoice items, transactions, and customers. Setup and other instructions, including information regarding each of the available endpoints, are detailed below.
+This is a Rails-based API that allows a user or application to consume sales engine data for merchants, items, invoices, invoice items, transactions, and customers. Setup and other instructions, including information regarding each of the available endpoints, are detailed below.
 
 ### Contributors
 [Adam Conway](http://www.github.com/adam-conway)
