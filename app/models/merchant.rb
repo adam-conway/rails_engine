@@ -6,10 +6,6 @@ class Merchant < ApplicationRecord
   has_many :invoice_items, through: :invoices
 
   def single_merchant_revenue
-    # @revenue ||= invoices
-    #   .joins(:transactions, :invoice_items)
-    #   .where(transactions: {result: "Success"})
-    #   .sum("invoice_items.unit_price * invoice_items.quantity")
     invoices
       .select("sum(invoice_items.unit_price * invoice_items.quantity) AS revenue")
       .joins(:transactions, :invoice_items)
@@ -72,6 +68,3 @@ class Merchant < ApplicationRecord
       .limit(quantity)
   end
 end
-
-
-# GET /api/v1/merchants/most_revenue?quantity=x
